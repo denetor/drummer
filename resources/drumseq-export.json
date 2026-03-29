@@ -1,0 +1,532 @@
+{
+  "name": "Untitled",
+  "configuration": {
+    "bpm": 100,
+    "measuresPerBar": 4,
+    "beatsPerMeasure": 4,
+    "visibleInstruments": [2, 4, 5, 6, 1, 0]
+  },
+  "rows": [
+    {
+      "measures": [
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        },
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 2, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        },
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        },
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        }
+      ],
+      "repetitions": 1
+    },
+    {
+      "measures": [
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        },
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        },
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        },
+        {
+          "beats": [
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                { "notes": [{ "instrument": 2, "accent": false }] },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 0, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            },
+            {
+              "quarters": [
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] },
+                {
+                  "notes": [
+                    { "instrument": 2, "accent": false },
+                    { "instrument": 1, "accent": false }
+                  ]
+                },
+                { "notes": [] }
+              ]
+            }
+          ],
+          "repetitions": 1
+        }
+      ],
+      "repetitions": 1
+    }
+  ]
+}
