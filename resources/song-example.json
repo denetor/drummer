@@ -1,0 +1,13 @@
+{
+    "artist": "The Mission",
+    "title": "Kingdom come",
+    "properties": {
+        "bpm": 120
+    },
+    "tracks": [
+        {
+            "instrument": "drums",
+            "measures": []
+        }
+    ]
+}

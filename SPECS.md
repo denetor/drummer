@@ -30,15 +30,28 @@ The application targets desktop browsers. Audio playback uses the Web Audio API.
 - [x] Add a `drum` route displaying only a "Drum machine" title
 - [x] make `drum` the default route when entering the application
 
-### v0.2 — Feature complete
-- [ ] Feature C
-- [ ] Feature D
-- [ ] Polish and accessibility pass
+### v0.2 — Song edit page, without song rows
+- [x] Add the data model for the song configuration 
+- [ ] In the drum component, have a default instance of Song, displaying the song title as page title, the artist and the bpm value
+- [ ] Allow edit of song title, artist and bpm
+- [ ] Add a placeholder for the song rows
+
+### v0.3 — Add song rows, add measures, edit notes. Row display component must be replaceable with other future components
+- [ ] Define data structure to store the beats in a measure
+- [ ] Create a component to display a row like guitar tabs (one row for each drum)
+
+### v0.4 — Play instrument sounds
+
+### v0.5 — Edit song rows: copy and delete rows and measures; add notes to measures
+
+### v0.6 — Export and import song json
+
+### v0.7 — Component to show rows as pentagram
+
+### v0.8 — Measures library
 
 ### v1.0 — Release
-- [ ] All tests passing
-- [ ] Production build optimized
-- [ ] Documentation complete
+- [ ] To be defined
 
 ---
 
