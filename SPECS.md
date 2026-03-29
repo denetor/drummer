@@ -27,7 +27,8 @@ The application targets desktop browsers. Audio playback uses the Web Audio API.
 - [x] Empty current application: write only "hello world" in the only page available.
 - [x] dockerized environment
 - [x] Install and use the Angular Material UI library
-- [ ] `drum` route displaying only a "Drum machine" title
+- [x] Add a `drum` route displaying only a "Drum machine" title
+- [ ] make `drum` the default route when entering the application 
 
 ### v0.2 — Feature complete
 - [ ] Feature C
