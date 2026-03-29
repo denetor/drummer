@@ -1,0 +1,20 @@
+form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+
+    mat-form-field {
+        width: 12rem;
+
+        &:first-of-type {
+            width: 16rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+}
