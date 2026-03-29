@@ -34,7 +34,7 @@ The application targets desktop browsers. Audio playback uses the Web Audio API.
 - [x] Add the data model for the song configuration 
 - [x] In the drum component, have a default instance of Song, displaying the song title as page title, the artist and the bpm value
 - [x] Allow edit of song title, artist and bpm
-- [ ] Add a placeholder for the song rows
+- [x] Add a placeholder for the song rows in the drum component
 
 ### v0.3 — Add song rows, add measures, edit notes. Row display component must be replaceable with other future components
 - [ ] Define data structure to store the beats in a measure

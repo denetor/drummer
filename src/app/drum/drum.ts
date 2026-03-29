@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Song } from '../core/models/song';
 import { SongHeaderComponent } from './song-header/song-header';
 import { SongHeaderEditComponent } from './song-header-edit/song-header-edit';
+import { SongRowsComponent } from './song-rows/song-rows';
 
 const DEFAULT_SONG: Song = {
     artist: 'The Mission',
@@ -12,7 +13,7 @@ const DEFAULT_SONG: Song = {
 
 @Component({
     selector: 'app-drum',
-    imports: [SongHeaderComponent, SongHeaderEditComponent],
+    imports: [SongHeaderComponent, SongHeaderEditComponent, SongRowsComponent],
     template: `
         @if (isEditing()) {
             <app-song-header-edit
@@ -23,6 +24,7 @@ const DEFAULT_SONG: Song = {
         } @else {
             <app-song-header [song]="song()" (editRequested)="isEditing.set(true)" />
         }
+        <app-song-rows />
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
