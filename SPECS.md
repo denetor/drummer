@@ -32,7 +32,7 @@ The application targets desktop browsers. Audio playback uses the Web Audio API.
 
 ### v0.2 — Song edit page, without song rows
 - [x] Add the data model for the song configuration 
-- [ ] In the drum component, have a default instance of Song, displaying the song title as page title, the artist and the bpm value
+- [x] In the drum component, have a default instance of Song, displaying the song title as page title, the artist and the bpm value
 - [ ] Allow edit of song title, artist and bpm
 - [ ] Add a placeholder for the song rows
 
