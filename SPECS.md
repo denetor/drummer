@@ -24,7 +24,7 @@ The application targets desktop browsers. Audio playback uses the Web Audio API.
 ## Milestones
 
 ### v0.1 — Empty application
-- [ ] Empty current application: write only hello world in the only page available.
+- [x] Empty current application: write only "hello world" in the only page available.
 - [ ] Install and use the Angular Material UI library
 - [ ] `drum` route displaying only a "Drum machine" title
 
