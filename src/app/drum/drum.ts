@@ -23,40 +23,40 @@ const DEFAULT_SONG: Song = {
                         // 1
                         {
                             notes: [
-                                { velocity: 64, pitch: 'g5' },
-                                { velocity: 64, pitch: 'd4' },
+                                { velocity: 64, pitch: 'HH' },
+                                { velocity: 64, pitch: 'BD' },
                             ],
                         },
-                        { notes: [{ velocity: 64, pitch: 'g5' }] },
+                        { notes: [{ velocity: 64, pitch: 'HH' }] },
                         // 2
                         {
                             notes: [
-                                { velocity: 64, pitch: 'g5' },
-                                { velocity: 64, pitch: 'c5' },
+                                { velocity: 64, pitch: 'HH' },
+                                { velocity: 64, pitch: 'SD' },
                             ],
                         },
-                        { notes: [{ velocity: 64, pitch: 'g5' }] },
+                        { notes: [{ velocity: 64, pitch: 'HH' }] },
                         // 3
                         {
                             notes: [
-                                { velocity: 64, pitch: 'g5' },
-                                { velocity: 64, pitch: 'd4' },
+                                { velocity: 64, pitch: 'HH' },
+                                { velocity: 64, pitch: 'BD' },
                             ],
                         },
                         {
                             notes: [
-                                { velocity: 64, pitch: 'g5' },
-                                { velocity: 64, pitch: 'd4' },
+                                { velocity: 64, pitch: 'HH' },
+                                { velocity: 64, pitch: 'BD' },
                             ],
                         },
                         // 4
                         {
                             notes: [
-                                { velocity: 64, pitch: 'g5' },
-                                { velocity: 64, pitch: 'c5' },
+                                { velocity: 64, pitch: 'HH' },
+                                { velocity: 64, pitch: 'SD' },
                             ],
                         },
-                        { notes: [{ velocity: 64, pitch: 'g5' }] },
+                        { notes: [{ velocity: 64, pitch: 'HH' }] },
                     ],
                 },
             ],

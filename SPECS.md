@@ -85,6 +85,8 @@ const measure: Measure = {
 };
 ```
 
+Information abount Measure representation can be found in the file `resources/measure-representation.md`.
+
 ---
 
 ## Features
