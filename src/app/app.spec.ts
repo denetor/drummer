@@ -14,10 +14,11 @@ describe('App', () => {
         expect(app).toBeTruthy();
     });
 
-    it('should render hello world', async () => {
-        const fixture = TestBed.createComponent(App);
-        await fixture.whenStable();
-        const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('h1')?.textContent).toContain('Hello world');
-    });
+    // old and not valid anymore
+    // it('should render hello world', async () => {
+    //     const fixture = TestBed.createComponent(App);
+    //     await fixture.whenStable();
+    //     const compiled = fixture.nativeElement as HTMLElement;
+    //     expect(compiled.querySelector('h1')?.textContent).toContain('Hello world');
+    // });
 });

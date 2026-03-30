@@ -5,7 +5,7 @@ import { Song } from '../core/models/song';
 import { Track } from '../core/models/track';
 import { SongHeaderComponent } from './song-header/song-header';
 import { SongHeaderEditComponent } from './song-header-edit/song-header-edit';
-import { SongRowsComponent } from './song-rows/song-rows';
+import { SongTrackComponent } from './song-track/song-track';
 
 const DEFAULT_SONG: Song = {
     artist: 'The Mission',
@@ -66,7 +66,7 @@ const DEFAULT_SONG: Song = {
 
 @Component({
     selector: 'app-drum',
-    imports: [SongHeaderComponent, SongHeaderEditComponent, SongRowsComponent, MatFormFieldModule, MatSelectModule],
+    imports: [SongHeaderComponent, SongHeaderEditComponent, SongTrackComponent, MatFormFieldModule, MatSelectModule],
     template: `
         @if (isEditing()) {
             <app-song-header-edit
@@ -90,7 +90,7 @@ const DEFAULT_SONG: Song = {
                 </mat-select>
             </mat-form-field>
         </div>
-        <app-song-rows />
+        <app-song-track />
     `,
     styles: `
         .track-selector {
