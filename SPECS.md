@@ -108,7 +108,10 @@ const measure: Measure = {
 
 ### v0.3 — Add song rows, add measures, edit notes. Row display component must be replaceable with other future components
 - [x] Define data structure to store the beats in a measure
-- [ ] Create a component to display a row like guitar tabs (one row for each drum)
+- [ ] In the Drum component, add a dropdown to choose the track to display: for now only "drums" option is available and selected 
+- [ ] Rename `app-song-rows` component in `app-song-track`
+- [ ] Display all measures of the track selected in the track dropdown: each measure must be displayed with a `MeasureComponent`
+- [ ] Make the measures wrappable when too many elements are not fitting the browser width 
 
 ### v0.4 — Play instrument sounds
 
