@@ -37,7 +37,7 @@ A Measure is represented as an array of Steps. Each Step can hold multiple simul
 ```typescript
 interface Note {
     velocity: number;   // hit intensity, 0–127
-    pitch?: string;     // e.g. "C4" — optional, for pitched instruments
+    pitch: string;      // note, if pitched instrument or drum type on drumd e.g. "d4" for kick, "c5" fr snare, "g5" for hi-hat...
     duration?: number;  // length in steps, default 1
 }
 

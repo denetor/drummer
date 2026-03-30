@@ -8,7 +8,57 @@ const DEFAULT_SONG: Song = {
     artist: 'The Mission',
     title: 'Kingdom come',
     properties: { bpm: 120 },
-    tracks: [],
+    tracks: [
+        {
+            instrument: 'drums',
+            measures: [
+                {
+                    beatsPerBar: 4,
+                    beatUnit: 4,
+                    stepsPerBeat: 2,
+                    steps: [
+                        // 1
+                        {
+                            notes: [
+                                { velocity: 64, pitch: 'g5' },
+                                { velocity: 64, pitch: 'd4' },
+                            ],
+                        },
+                        { notes: [{ velocity: 64, pitch: 'g5' }] },
+                        // 2
+                        {
+                            notes: [
+                                { velocity: 64, pitch: 'g5' },
+                                { velocity: 64, pitch: 'c5' },
+                            ],
+                        },
+                        { notes: [{ velocity: 64, pitch: 'g5' }] },
+                        // 3
+                        {
+                            notes: [
+                                { velocity: 64, pitch: 'g5' },
+                                { velocity: 64, pitch: 'd4' },
+                            ],
+                        },
+                        {
+                            notes: [
+                                { velocity: 64, pitch: 'g5' },
+                                { velocity: 64, pitch: 'd4' },
+                            ],
+                        },
+                        // 4
+                        {
+                            notes: [
+                                { velocity: 64, pitch: 'g5' },
+                                { velocity: 64, pitch: 'c5' },
+                            ],
+                        },
+                        { notes: [{ velocity: 64, pitch: 'g5' }] },
+                    ],
+                },
+            ],
+        },
+    ],
 };
 
 @Component({
