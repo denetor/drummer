@@ -145,6 +145,8 @@ Information abount Measure representation can be found in the file `resources/me
 - [ ] Allow changing beatsPerBar and stepsPerBeat for each measure
 - [ ] Better SongControlBar buttons
 - [ ] Add comments to measures, to be displayed on top or below
+- [ ] In MeasureEditorComponent, add a button to clear all cells 
+- [ ] Clearer loop-play button in MeasureEditorComponent
 
 ### v0.9 — Connection to mock API server to retrieve the songs list and a song's data
 - [ ] Mock endpoint to list songs
