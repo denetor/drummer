@@ -97,10 +97,21 @@ export class MeasureComponent {
 
         let beatRow = '   |';
         for (let beat = 0; beat < beatsPerBar; beat++) {
-            if (stepsPerBeat === 4) {
-                beatRow += String(beat + 1) + 'e&a|';
-            } else {
-                beatRow += String(beat + 1).padEnd(stepsPerBeat, ' ') + '|';
+            switch (stepsPerBeat) {
+                case 2:
+                    beatRow += String(beat + 1) + '&|';
+                    break;
+                case 3:
+                    beatRow += String(beat + 1) + ' tt|';
+                    break;
+                case 4:
+                    beatRow += String(beat + 1) + 'e&a|';
+                    break;
+                case 6:
+                    beatRow += String(beat + 1) + ' t t |';
+                    break;
+                default:
+                    beatRow += String(beat + 1).padEnd(stepsPerBeat, ' ') + '|';
             }
         }
         lines.push(beatRow);
