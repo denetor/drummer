@@ -124,13 +124,13 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add a metronome toggler to the SongControlBar component, and make it play sound when starting each measure beat. The first beat of a measure should have a higher pitch
 - [x] Highlight the current playing measure while playing the song
 
-### v0.5 — Edit song rows: copy and delete rows and measures; add notes to measures
+### v0.5 — Edit song: copy and delete measures; add notes to measures
 - [x] Add an `edit` toggle to SongControlBar. This will put the SongTrackComponent in edit mode
 - [x] Add a `New Measure` button at the end of SongTrackComponent. This creates a new empty measure with the same properties as the previous (but without the notes)
 - [x] Add a small `edit` icon button below each measure. This will be visible only when the track is in edit mode
 - [x] Think the best way to edit a measure: inline changing the display mode of measures (to allow a span for each beat step) or in a modal window
 - [x] Add to MeasureEditorComponent a control to play in loop the measure currently being edited. If the user closes the MeasureEditorComponent, the loop playback must stop
-- [ ] In edit mode, add a button to duplicate the corresponding measure
+- [x] In edit mode, add a button to duplicate the corresponding measure
 - [ ] In edit mode, add a button to delete a measure
 - [ ] In edit mode, add a button to copy a measure to another one
 

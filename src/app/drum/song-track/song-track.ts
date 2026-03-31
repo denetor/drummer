@@ -13,13 +13,25 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
     template: `
         <div class="song-track">
             @for (measure of track().measures; track $index) {
-                <app-measure
-                    [measure]="measure"
-                    [instrument]="track().instrument"
-                    [active]="player.currentMeasureIndex() === $index"
-                    [editMode]="editMode()"
-                    (editRequested)="editingMeasureIndex.set($index)"
-                />
+                <div class="measure-wrapper">
+                    <app-measure
+                        [measure]="measure"
+                        [instrument]="track().instrument"
+                        [active]="player.currentMeasureIndex() === $index"
+                        [editMode]="editMode()"
+                        (editRequested)="editingMeasureIndex.set($index)"
+                    />
+                    @if (editMode()) {
+                        <button
+                            mat-icon-button
+                            class="duplicate-btn"
+                            [attr.aria-label]="'Duplicate measure ' + ($index + 1)"
+                            (click)="duplicateMeasure($index)"
+                        >
+                            <mat-icon>content_copy</mat-icon>
+                        </button>
+                    }
+                </div>
             }
             @if (editMode()) {
                 <button mat-stroked-button class="new-measure-btn" (click)="newMeasure.emit()">
@@ -46,6 +58,13 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
             gap: 1rem;
             flex-wrap: wrap;
             align-items: flex-start;
+        }
+
+        .measure-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         .new-measure-btn {
@@ -76,6 +95,13 @@ export class SongTrackComponent {
     onMeasureChange(updated: Measure): void {
         const measures = [...this.track().measures];
         measures[this.editingMeasureIndex()!] = updated;
+        this.trackChange.emit({ ...this.track(), measures });
+    }
+
+    duplicateMeasure(index: number): void {
+        const measures = [...this.track().measures];
+        const copy = { ...measures[index], steps: [...measures[index].steps] };
+        measures.splice(index + 1, 0, copy);
         this.trackChange.emit({ ...this.track(), measures });
     }
 }
