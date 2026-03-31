@@ -151,6 +151,7 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 export class MeasureEditorComponent {
     measure = input.required<Measure>();
     instrument = input.required<string>();
+    bpm = input.required<number>();
     measureChange = output<Measure>();
     closed = output<void>();
 
@@ -168,7 +169,7 @@ export class MeasureEditorComponent {
         if (this.player.state() === 'playing') {
             this.player.stop();
         } else {
-            await this.player.playMeasureLoop(this.measure(), this.instrument());
+            await this.player.playMeasureLoop(this.measure(), this.instrument(), this.bpm());
         }
     }
 
@@ -207,6 +208,10 @@ export class MeasureEditorComponent {
             steps[stepIndex] = { notes: [...(step?.notes ?? []), { pitch, velocity: 100 }] };
         }
 
-        this.measureChange.emit({ ...measure, steps });
+        const updated: Measure = { ...measure, steps };
+        if (this.player.state() === 'playing') {
+            this.player.updateLoopMeasure(updated);
+        }
+        this.measureChange.emit(updated);
     }
 }

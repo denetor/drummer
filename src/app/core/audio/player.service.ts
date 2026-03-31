@@ -59,14 +59,22 @@ export class PlayerService {
         this.state.set('paused');
     }
 
-    async playMeasureLoop(measure: Measure, instrument: string): Promise<void> {
+    async playMeasureLoop(measure: Measure, instrument: string, bpm: number): Promise<void> {
         const loopSong: Song = {
             artist: '',
             title: '',
-            properties: { bpm: this.currentBpm() },
+            properties: { bpm },
             tracks: [{ instrument, measures: [measure] }],
         };
-        await this.play(loopSong, this.currentBpm());
+        await this.play(loopSong, bpm);
+    }
+
+    updateLoopMeasure(measure: Measure): void {
+        if (!this.song || this.song.tracks.length === 0) return;
+        this.song = {
+            ...this.song,
+            tracks: [{ ...this.song.tracks[0], measures: [measure] }],
+        };
     }
 
     stop(): void {

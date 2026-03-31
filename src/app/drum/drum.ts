@@ -38,8 +38,8 @@ import { example3Song } from '../core/songs/example3.song';
                 </mat-select>
             </mat-form-field>
         </div>
-        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" />
-        <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" (newMeasure)="onNewMeasure()" (trackChange)="onTrackChange($event)" />
+        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" (bpmChange)="currentBpm.set($event)" />
+        <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" [bpm]="currentBpm()" (newMeasure)="onNewMeasure()" (trackChange)="onTrackChange($event)" />
     `,
     styles: `
         .track-selector {
@@ -52,6 +52,7 @@ export class DrumComponent {
     song = signal<Song>(example2Song);
     isEditing = signal(false);
     isTrackEditing = signal(false);
+    currentBpm = signal<number>(this.song().properties.bpm);
     selectedTrack = signal<Track>(this.song().tracks[0]);
 
     onSave(updated: Song): void {

@@ -17,7 +17,7 @@ import { PlayerService } from '../../core/audio/player.service';
                     matInput
                     type="number"
                     [value]="currentBpm()"
-                    (change)="currentBpm.set(+$any($event.target).value)"
+                    (change)="onBpmChange(+$any($event.target).value)"
                     min="1"
                     max="300"
                 />
@@ -105,9 +105,15 @@ export class SongControlBarComponent {
     bpm = input.required<number>();
     currentBpm = linkedSignal(() => this.bpm());
     editModeChange = output<boolean>();
+    bpmChange = output<number>();
 
     protected readonly editMode = signal(false);
     protected readonly player = inject(PlayerService);
+
+    onBpmChange(value: number): void {
+        this.currentBpm.set(value);
+        this.bpmChange.emit(value);
+    }
 
     toggleEditMode(): void {
         this.editMode.update((v) => !v);

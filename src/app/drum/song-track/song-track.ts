@@ -32,6 +32,7 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
             <app-measure-editor
                 [measure]="track().measures[editingMeasureIndex()!]"
                 [instrument]="track().instrument"
+                [bpm]="bpm()"
                 (measureChange)="onMeasureChange($event)"
                 (closed)="editingMeasureIndex.set(null)"
             />
@@ -56,6 +57,7 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
 export class SongTrackComponent {
     track = input.required<Track>();
     editMode = input(false);
+    bpm = input(120);
     newMeasure = output<void>();
     trackChange = output<Track>();
 
