@@ -1,14 +1,28 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Track } from '../../core/models/track';
+import { MeasureComponent } from '../measure/measure';
 
 @Component({
     selector: 'app-song-track',
-    template: `<div class="song-track-placeholder">Song track</div>`,
+    imports: [MeasureComponent],
+    template: `
+        <div class="song-track">
+            @for (measure of track().measures; track $index) {
+                <app-measure [measure]="measure" [instrument]="track().instrument" />
+            }
+        </div>
+    `,
     styles: `
-        .song-track-placeholder {
+        .song-track {
             padding: 1rem 1.5rem;
-            color: var(--mat-sys-on-surface-variant);
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SongTrackComponent {}
+export class SongTrackComponent {
+    track = input.required<Track>();
+}

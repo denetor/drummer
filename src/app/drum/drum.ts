@@ -6,63 +6,9 @@ import { Track } from '../core/models/track';
 import { SongHeaderComponent } from './song-header/song-header';
 import { SongHeaderEditComponent } from './song-header-edit/song-header-edit';
 import { SongTrackComponent } from './song-track/song-track';
+import { example1Song } from '../core/songs/example1.song';
+import { example2Song } from '../core/songs/example2.song';
 
-const DEFAULT_SONG: Song = {
-    artist: 'The Mission',
-    title: 'Kingdom come',
-    properties: { bpm: 120 },
-    tracks: [
-        {
-            instrument: 'drums',
-            measures: [
-                {
-                    beatsPerBar: 4,
-                    beatUnit: 4,
-                    stepsPerBeat: 2,
-                    steps: [
-                        // 1
-                        {
-                            notes: [
-                                { velocity: 64, pitch: 'HH' },
-                                { velocity: 64, pitch: 'BD' },
-                            ],
-                        },
-                        { notes: [{ velocity: 64, pitch: 'HH' }] },
-                        // 2
-                        {
-                            notes: [
-                                { velocity: 64, pitch: 'HH' },
-                                { velocity: 64, pitch: 'SD' },
-                            ],
-                        },
-                        { notes: [{ velocity: 64, pitch: 'HH' }] },
-                        // 3
-                        {
-                            notes: [
-                                { velocity: 64, pitch: 'HH' },
-                                { velocity: 64, pitch: 'BD' },
-                            ],
-                        },
-                        {
-                            notes: [
-                                { velocity: 64, pitch: 'HH' },
-                                { velocity: 64, pitch: 'BD' },
-                            ],
-                        },
-                        // 4
-                        {
-                            notes: [
-                                { velocity: 64, pitch: 'HH' },
-                                { velocity: 64, pitch: 'SD' },
-                            ],
-                        },
-                        { notes: [{ velocity: 64, pitch: 'HH' }] },
-                    ],
-                },
-            ],
-        },
-    ],
-};
 
 @Component({
     selector: 'app-drum',
@@ -90,7 +36,7 @@ const DEFAULT_SONG: Song = {
                 </mat-select>
             </mat-form-field>
         </div>
-        <app-song-track />
+        <app-song-track [track]="selectedTrack()" />
     `,
     styles: `
         .track-selector {
@@ -100,9 +46,9 @@ const DEFAULT_SONG: Song = {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
-    song = signal<Song>(DEFAULT_SONG);
+    song = signal<Song>(example1Song);
     isEditing = signal(false);
-    selectedTrack = signal<Track>(DEFAULT_SONG.tracks[0]);
+    selectedTrack = signal<Track>(this.song().tracks[0]);
 
     onSave(updated: Song): void {
         this.song.set(updated);
