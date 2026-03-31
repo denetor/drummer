@@ -122,7 +122,7 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Think and create a Player component to play the song using Web audio API
 - [x] Connect BPM and music control buttons
 - [ ] Add a metronome toggler to the SongControlBar component, and make it play sound when starting each measure beat. The first beat of a measure should have a higher pitch
-- [ ] Highlight the current playing measure while playing the song
+- [x] Highlight the current playing measure while playing the song
 
 ### v0.5 — Edit song rows: copy and delete rows and measures; add notes to measures
 

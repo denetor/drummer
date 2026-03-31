@@ -1,16 +1,31 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+
 import { Measure } from '../../core/models/measure';
 
 const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
 @Component({
     selector: 'app-measure',
-    template: `<pre class="measure-tab" role="img" [attr.aria-label]="ariaLabel()">{{ tabText() }}</pre>`,
+    template: `
+        <pre
+            class="measure-tab"
+            role="img"
+            [attr.aria-label]="ariaLabel()"
+            [class.active]="active()"
+        >{{ tabText() }}</pre>
+    `,
     styles: `
         .measure-tab {
             font-family: monospace;
             margin: 0;
             line-height: 1.5;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.1s ease;
+        }
+
+        .measure-tab.active {
+            background-color: #fffde7;
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +33,7 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 export class MeasureComponent {
     measure = input.required<Measure>();
     instrument = input.required<string>();
+    active = input(false);
 
     tabText = computed(() => {
         if (this.instrument() !== 'drums') return '';

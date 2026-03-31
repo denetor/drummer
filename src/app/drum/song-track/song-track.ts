@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { Track } from '../../core/models/track';
+import { PlayerService } from '../../core/audio/player.service';
 import { MeasureComponent } from '../measure/measure';
 
 @Component({
@@ -8,7 +9,11 @@ import { MeasureComponent } from '../measure/measure';
     template: `
         <div class="song-track">
             @for (measure of track().measures; track $index) {
-                <app-measure [measure]="measure" [instrument]="track().instrument" />
+                <app-measure
+                    [measure]="measure"
+                    [instrument]="track().instrument"
+                    [active]="player.currentMeasureIndex() === $index"
+                />
             }
         </div>
     `,
@@ -25,4 +30,5 @@ import { MeasureComponent } from '../measure/measure';
 })
 export class SongTrackComponent {
     track = input.required<Track>();
+    protected readonly player = inject(PlayerService);
 }
