@@ -132,7 +132,7 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add to MeasureEditorComponent a control to play in loop the measure currently being edited. If the user closes the MeasureEditorComponent, the loop playback must stop
 - [x] In edit mode, add a button to duplicate the corresponding measure
 - [x] In edit mode, add a button to delete a measure
-- [ ] In edit mode, add a button to copy a measure to another one
+- [x] In edit mode, add a button to copy a measure to another one
 
 ### v0.6 — Export and import song json
 
