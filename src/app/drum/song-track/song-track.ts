@@ -31,6 +31,7 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
         @if (editingMeasureIndex() !== null) {
             <app-measure-editor
                 [measure]="track().measures[editingMeasureIndex()!]"
+                [instrument]="track().instrument"
                 (measureChange)="onMeasureChange($event)"
                 (closed)="editingMeasureIndex.set(null)"
             />

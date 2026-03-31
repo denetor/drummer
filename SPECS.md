@@ -129,7 +129,7 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add a `New Measure` button at the end of SongTrackComponent. This creates a new empty measure with the same properties as the previous (but without the notes)
 - [x] Add a small `edit` icon button below each measure. This will be visible only when the track is in edit mode
 - [x] Think the best way to edit a measure: inline changing the display mode of measures (to allow a span for each beat step) or in a modal window
-- [ ] Add to MeasureEditorComponent a control to play in loop the measure currently being edited 
+- [x] Add to MeasureEditorComponent a control to play in loop the measure currently being edited. If the user closes the MeasureEditorComponent, the loop playback must stop
 
 ### v0.6 — Export and import song json
 

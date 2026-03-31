@@ -1,4 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { Measure } from '../models/measure';
 import { Song } from '../models/song';
 import { AudioPlayerService } from './audio-player.service';
 
@@ -11,6 +12,7 @@ export class PlayerService {
     readonly state = signal<PlayerState>('idle');
     readonly currentMeasureIndex = signal<number>(-1);
     readonly metronomeEnabled = signal<boolean>(false);
+    readonly currentBpm = signal<number>(120);
 
     private song: Song | null = null;
     private bpm = 120;
@@ -27,6 +29,7 @@ export class PlayerService {
 
         this.song = song;
         this.bpm = bpm;
+        this.currentBpm.set(bpm);
 
         const instruments = [...new Set(song.tracks.map((t) => t.instrument))];
         await Promise.all([
@@ -54,6 +57,16 @@ export class PlayerService {
         if (this.state() !== 'playing') return;
         this.stopScheduler();
         this.state.set('paused');
+    }
+
+    async playMeasureLoop(measure: Measure, instrument: string): Promise<void> {
+        const loopSong: Song = {
+            artist: '',
+            title: '',
+            properties: { bpm: this.currentBpm() },
+            tracks: [{ instrument, measures: [measure] }],
+        };
+        await this.play(loopSong, this.currentBpm());
     }
 
     stop(): void {
@@ -122,10 +135,11 @@ export class PlayerService {
         if (!primaryTrack) return;
 
         const measure = primaryTrack.measures[this.measureIndex];
+        const totalSteps = measure.beatsPerBar * measure.stepsPerBeat;
         this.nextStepTime += 60 / (this.bpm * measure.stepsPerBeat);
         this.stepIndex++;
 
-        if (this.stepIndex >= measure.steps.length) {
+        if (this.stepIndex >= totalSteps) {
             this.stepIndex = 0;
             this.measureIndex = (this.measureIndex + 1) % primaryTrack.measures.length;
             this.currentMeasureIndex.set(this.measureIndex);

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Measure } from '../../core/models/measure';
+import { PlayerService } from '../../core/audio/player.service';
 
 const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
@@ -12,6 +13,16 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
         <div class="editor-panel">
             <div class="editor-header">
                 <span class="editor-title">Edit Measure</span>
+                <button
+                    mat-icon-button
+                    [attr.aria-label]="player.state() === 'playing' ? 'Stop loop' : 'Play loop'"
+                    [attr.aria-pressed]="player.state() === 'playing'"
+                    [class.loop-active]="player.state() === 'playing'"
+                    (click)="toggleLoop()"
+                    title="Loop measure"
+                >
+                    <mat-icon>{{ player.state() === 'playing' ? 'stop' : 'loop' }}</mat-icon>
+                </button>
                 <button mat-icon-button aria-label="Close editor" (click)="closed.emit()">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -53,7 +64,7 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
         .editor-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 0.25rem;
             padding: 0.25rem 0.25rem 0.25rem 1rem;
             background: var(--mat-sys-surface-variant);
             border-bottom: 1px solid var(--mat-sys-outline-variant);
@@ -62,6 +73,11 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
         .editor-title {
             font-weight: 500;
             font-size: 0.875rem;
+            flex: 1;
+        }
+
+        .loop-active {
+            color: var(--mat-sys-primary);
         }
 
         .editor-body {
@@ -134,8 +150,27 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 })
 export class MeasureEditorComponent {
     measure = input.required<Measure>();
+    instrument = input.required<string>();
     measureChange = output<Measure>();
     closed = output<void>();
+
+    protected readonly player = inject(PlayerService);
+
+    constructor() {
+        inject(DestroyRef).onDestroy(() => {
+            if (this.player.state() === 'playing') {
+                this.player.stop();
+            }
+        });
+    }
+
+    async toggleLoop(): Promise<void> {
+        if (this.player.state() === 'playing') {
+            this.player.stop();
+        } else {
+            await this.player.playMeasureLoop(this.measure(), this.instrument());
+        }
+    }
 
     gridColumns = computed(() => {
         const { beatsPerBar, stepsPerBeat } = this.measure();
