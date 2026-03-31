@@ -48,6 +48,16 @@ import { PlayerService } from '../../core/audio/player.service';
                     <mat-icon>stop</mat-icon>
                 </button>
             </div>
+            <button
+                mat-icon-button
+                aria-label="Metronome"
+                [attr.aria-pressed]="player.metronomeEnabled()"
+                [class.metronome-active]="player.metronomeEnabled()"
+                (click)="player.metronomeEnabled.update((v) => !v)"
+                title="Toggle metronome"
+            >
+                <mat-icon>music_note</mat-icon>
+            </button>
         </div>
     `,
     styles: `
@@ -66,6 +76,10 @@ import { PlayerService } from '../../core/audio/player.service';
             display: flex;
             align-items: center;
             gap: 0.25rem;
+        }
+
+        .metronome-active {
+            color: var(--mat-sys-primary);
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,

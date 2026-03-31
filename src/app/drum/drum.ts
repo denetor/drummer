@@ -9,6 +9,7 @@ import { SongTrackComponent } from './song-track/song-track';
 import { SongControlBarComponent } from './song-control-bar/song-control-bar';
 import { example1Song } from '../core/songs/example1.song';
 import { example2Song } from '../core/songs/example2.song';
+import { example3Song } from '../core/songs/example3.song';
 
 
 @Component({
@@ -48,7 +49,7 @@ import { example2Song } from '../core/songs/example2.song';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
-    song = signal<Song>(example2Song);
+    song = signal<Song>(example3Song);
     isEditing = signal(false);
     selectedTrack = signal<Track>(this.song().tracks[0]);
 

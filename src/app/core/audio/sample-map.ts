@@ -7,6 +7,12 @@ const DRUM_SAMPLES: Record<string, string> = {
     FT: 'samples/drums/floor-tom.mp3',
 };
 
+const METRONOME_SAMPLES: Record<string, string> = {
+    BEAT1: 'samples/metronome/metronome-click-hi.mp3', // first beat of each measure (higher pitch)
+    BEAT: 'samples/metronome/metronome-click-lo.mp3',  // other beats
+};
+
 export const SAMPLE_MAP: Record<string, Record<string, string>> = {
     drums: DRUM_SAMPLES,
+    metronome: METRONOME_SAMPLES,
 };

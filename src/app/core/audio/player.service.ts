@@ -10,6 +10,7 @@ export class PlayerService {
 
     readonly state = signal<PlayerState>('idle');
     readonly currentMeasureIndex = signal<number>(-1);
+    readonly metronomeEnabled = signal<boolean>(false);
 
     private song: Song | null = null;
     private bpm = 120;
@@ -28,7 +29,10 @@ export class PlayerService {
         this.bpm = bpm;
 
         const instruments = [...new Set(song.tracks.map((t) => t.instrument))];
-        await Promise.all(instruments.map((i) => this.audioPlayer.loadInstrument(i)));
+        await Promise.all([
+            ...instruments.map((i) => this.audioPlayer.loadInstrument(i)),
+            this.audioPlayer.loadInstrument('metronome'),
+        ]);
 
         this.measureIndex = 0;
         this.stepIndex = 0;
@@ -93,6 +97,23 @@ export class PlayerService {
                 }
             }
         }
+        if (this.metronomeEnabled()) {
+            this.scheduleMetronomeClick(time);
+        }
+    }
+
+    private scheduleMetronomeClick(time: number): void {
+        if (!this.song) return;
+        const primaryTrack = this.song.tracks[0];
+        if (!primaryTrack) return;
+        const measure = primaryTrack.measures[this.measureIndex];
+        if (!measure) return;
+
+        const isOnBeat = this.stepIndex % measure.stepsPerBeat === 0;
+        if (!isOnBeat) return;
+
+        const pitch = this.stepIndex === 0 ? 'BEAT1' : 'BEAT';
+        this.audioPlayer.playAtTime('metronome', pitch, time);
     }
 
     private advanceStep(): void {

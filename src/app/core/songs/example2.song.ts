@@ -2,7 +2,7 @@ import { Song } from '../models/song';
 
 export const example2Song: Song = {
     artist: 'Some artist',
-    title: 'Example one',
+    title: 'Example two',
     properties: { bpm: 100 },
     tracks: [
         {
