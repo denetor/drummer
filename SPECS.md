@@ -125,6 +125,10 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Highlight the current playing measure while playing the song
 
 ### v0.5 — Edit song rows: copy and delete rows and measures; add notes to measures
+- [x] Add an `edit` toggle to SongControlBar. This will put the SongTrackComponent in edit mode
+- [x] Add a `New Measure` button at the end of SongTrackComponent. This creates a new empty measure with the same properties as the previous (but without the notes)
+- [x] Add a small `edit` icon button below each measure. This will be visible only when the track is in edit mode
+- [ ] Think the best way to edit a measure: inline changing the display mode of measures (to allow a span for each beat step) or in a modal window
 
 ### v0.6 — Export and import song json
 
@@ -133,13 +137,18 @@ Information abount Measure representation can be found in the file `resources/me
 ### v0.8 — Measures library
 
 ### v1.0 — Release
-- [ ] To be defined
+- [ ] Deploy scripts
+
+### v1.1 — Connection to API server to save own songs, measure library, ...
 
 ---
 
 ## TODO
 
 Tasks that don't belong to a specific milestone yet.
+- [ ] Play or loop play only a section of a track
+- [ ] Copy track sections
+- [ ] Add comments to measures to be displayed on top or below
 
 ---
 

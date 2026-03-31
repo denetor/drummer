@@ -1,20 +1,41 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Measure } from '../../core/models/measure';
 
 const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
 @Component({
     selector: 'app-measure',
+    imports: [MatButtonModule, MatIconModule],
     template: `
-        <pre
-            class="measure-tab"
-            role="img"
-            [attr.aria-label]="ariaLabel()"
-            [class.active]="active()"
-        >{{ tabText() }}</pre>
+        <div class="measure-wrapper">
+            <pre
+                class="measure-tab"
+                role="img"
+                [attr.aria-label]="ariaLabel()"
+                [class.active]="active()"
+            >{{ tabText() }}</pre>
+            @if (editMode()) {
+                <button
+                    mat-icon-button
+                    class="edit-btn"
+                    aria-label="Edit measure"
+                    (click)="editRequested.emit()"
+                >
+                    <mat-icon>edit</mat-icon>
+                </button>
+            }
+        </div>
     `,
     styles: `
+        .measure-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
         .measure-tab {
             font-family: monospace;
             margin: 0;
@@ -27,6 +48,10 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
         .measure-tab.active {
             background-color: #fffde7;
         }
+
+        .edit-btn {
+            transform: scale(0.75);
+        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -34,6 +59,8 @@ export class MeasureComponent {
     measure = input.required<Measure>();
     instrument = input.required<string>();
     active = input(false);
+    editMode = input(false);
+    editRequested = output<void>();
 
     tabText = computed(() => {
         if (this.instrument() !== 'drums') return '';

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, linkedSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, output, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,7 @@ import { PlayerService } from '../../core/audio/player.service';
                 <button
                     mat-icon-button
                     aria-label="Play"
-                    [disabled]="player.state() === 'playing'"
+                    [disabled]="player.state() === 'playing' || editMode()"
                     (click)="onPlay()"
                 >
                     <mat-icon>play_arrow</mat-icon>
@@ -34,7 +34,7 @@ import { PlayerService } from '../../core/audio/player.service';
                 <button
                     mat-icon-button
                     aria-label="Pause"
-                    [disabled]="player.state() !== 'playing'"
+                    [disabled]="player.state() !== 'playing' || editMode()"
                     (click)="player.pause()"
                 >
                     <mat-icon>pause</mat-icon>
@@ -42,7 +42,7 @@ import { PlayerService } from '../../core/audio/player.service';
                 <button
                     mat-icon-button
                     aria-label="Stop"
-                    [disabled]="player.state() === 'idle'"
+                    [disabled]="player.state() === 'idle' || editMode()"
                     (click)="player.stop()"
                 >
                     <mat-icon>stop</mat-icon>
@@ -53,10 +53,22 @@ import { PlayerService } from '../../core/audio/player.service';
                 aria-label="Metronome"
                 [attr.aria-pressed]="player.metronomeEnabled()"
                 [class.metronome-active]="player.metronomeEnabled()"
+                [disabled]="editMode()"
                 (click)="player.metronomeEnabled.update((v) => !v)"
                 title="Toggle metronome"
             >
                 <mat-icon>music_note</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                [attr.aria-label]="editMode() ? 'Exit edit mode' : 'Enter edit mode'"
+                [attr.aria-pressed]="editMode()"
+                [class.edit-active]="editMode()"
+                [disabled]="player.state() === 'playing'"
+                (click)="toggleEditMode()"
+                title="Toggle edit mode"
+            >
+                <mat-icon>{{ editMode() ? 'edit_off' : 'edit' }}</mat-icon>
             </button>
         </div>
     `,
@@ -81,6 +93,10 @@ import { PlayerService } from '../../core/audio/player.service';
         .metronome-active {
             color: var(--mat-sys-primary);
         }
+
+        .edit-active {
+            color: var(--mat-sys-primary);
+        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -88,8 +104,15 @@ export class SongControlBarComponent {
     song = input.required<Song>();
     bpm = input.required<number>();
     currentBpm = linkedSignal(() => this.bpm());
+    editModeChange = output<boolean>();
 
+    protected readonly editMode = signal(false);
     protected readonly player = inject(PlayerService);
+
+    toggleEditMode(): void {
+        this.editMode.update((v) => !v);
+        this.editModeChange.emit(this.editMode());
+    }
 
     onPlay(): void {
         if (this.player.state() === 'paused') {

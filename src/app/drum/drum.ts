@@ -38,8 +38,8 @@ import { example3Song } from '../core/songs/example3.song';
                 </mat-select>
             </mat-form-field>
         </div>
-        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" />
-        <app-song-track [track]="selectedTrack()" />
+        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" />
+        <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" (newMeasure)="onNewMeasure()" />
     `,
     styles: `
         .track-selector {
@@ -51,10 +51,28 @@ import { example3Song } from '../core/songs/example3.song';
 export class DrumComponent {
     song = signal<Song>(example2Song);
     isEditing = signal(false);
+    isTrackEditing = signal(false);
     selectedTrack = signal<Track>(this.song().tracks[0]);
 
     onSave(updated: Song): void {
         this.song.set(updated);
         this.isEditing.set(false);
+    }
+
+    onNewMeasure(): void {
+        const track = this.selectedTrack();
+        const lastMeasure = track.measures[track.measures.length - 1];
+        const newMeasure = {
+            beatsPerBar: lastMeasure.beatsPerBar,
+            beatUnit: lastMeasure.beatUnit,
+            stepsPerBeat: lastMeasure.stepsPerBeat,
+            steps: [],
+        };
+        const updatedTrack = { ...track, measures: [...track.measures, newMeasure] };
+        this.song.update((s) => ({
+            ...s,
+            tracks: s.tracks.map((t) => (t === track ? updatedTrack : t)),
+        }));
+        this.selectedTrack.set(updatedTrack);
     }
 }
