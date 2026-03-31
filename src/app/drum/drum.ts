@@ -10,6 +10,7 @@ import { SongControlBarComponent } from './song-control-bar/song-control-bar';
 import { example1Song } from '../core/songs/example1.song';
 import { example2Song } from '../core/songs/example2.song';
 import { example3Song } from '../core/songs/example3.song';
+import { example4Song } from '../core/songs/example4.song';
 
 
 @Component({
@@ -49,7 +50,7 @@ import { example3Song } from '../core/songs/example3.song';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
-    song = signal<Song>(example2Song);
+    song = signal<Song>(example4Song);
     isEditing = signal(false);
     isTrackEditing = signal(false);
     currentBpm = signal<number>(this.song().properties.bpm);

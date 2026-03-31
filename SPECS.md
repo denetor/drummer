@@ -130,6 +130,9 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add a small `edit` icon button below each measure. This will be visible only when the track is in edit mode
 - [x] Think the best way to edit a measure: inline changing the display mode of measures (to allow a span for each beat step) or in a modal window
 - [x] Add to MeasureEditorComponent a control to play in loop the measure currently being edited. If the user closes the MeasureEditorComponent, the loop playback must stop
+- [ ] In edit mode, add a button to duplicate the corresponding measure
+- [ ] In edit mode, add a button to delete a measure
+- [ ] In edit mode, add a button to copy a measure to another one
 
 ### v0.6 — Export and import song json
 
