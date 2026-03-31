@@ -1,0 +1,12 @@
+const DRUM_SAMPLES: Record<string, string> = {
+    HH: 'samples/drums/hi-hat.mp3',
+    SN: 'samples/drums/snare.mp3',
+    BS: 'samples/drums/bass-drum.mp3',
+    HT: 'samples/drums/tom-1.mp3',
+    MT: 'samples/drums/tom-2.mp3',
+    FT: 'samples/drums/floor-tom.mp3',
+};
+
+export const SAMPLE_MAP: Record<string, Record<string, string>> = {
+    drums: DRUM_SAMPLES,
+};

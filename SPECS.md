@@ -118,7 +118,7 @@ Information abount Measure representation can be found in the file `resources/me
 ### v0.4 — Play instrument sounds
 - [x] Find some sound samples for the main drums/cymbals
 - [x] Create a SongControlBar component with BPM selection, start/pause/stop buttons, not connected with anything. Place the controller in a row below the track selector dropdown
-- [ ] Think about a way to connect audio samples with the track instrument
+- [x] Think about a way to connect audio samples with the track instrument
 - [ ] Think and create a Player component to play the song using Web audio API
 - [ ] Connect BPM and music control buttons
 - [ ] Add a metronome toggler to the SongControlBar component, and make it play sound when starting each measure beat. The first beat of a measure should have a higher pitch
