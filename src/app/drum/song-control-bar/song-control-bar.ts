@@ -70,6 +70,14 @@ import { PlayerService } from '../../core/audio/player.service';
             >
                 <mat-icon>{{ editMode() ? 'edit_off' : 'edit' }}</mat-icon>
             </button>
+            <button
+                mat-icon-button
+                aria-label="Export song as JSON"
+                title="Export song as JSON"
+                (click)="exportSong()"
+            >
+                <mat-icon>download</mat-icon>
+            </button>
         </div>
     `,
     styles: `
@@ -118,6 +126,17 @@ export class SongControlBarComponent {
     toggleEditMode(): void {
         this.editMode.update((v) => !v);
         this.editModeChange.emit(this.editMode());
+    }
+
+    exportSong(): void {
+        const json = JSON.stringify(this.song(), null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${this.song().title ?? 'song'}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
     }
 
     onPlay(): void {
