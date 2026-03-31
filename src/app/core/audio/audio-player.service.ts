@@ -6,13 +6,6 @@ export class AudioPlayerService {
     private context: AudioContext | null = null;
     private buffers = new Map<string, AudioBuffer>();
 
-    private getContext(): AudioContext {
-        if (!this.context) {
-            this.context = new AudioContext();
-        }
-        return this.context;
-    }
-
     async loadInstrument(instrument: string): Promise<void> {
         const pitchMap = SAMPLE_MAP[instrument];
         if (!pitchMap) return;
@@ -24,7 +17,18 @@ export class AudioPlayerService {
         );
     }
 
+    getContext(): AudioContext {
+        if (!this.context) {
+            this.context = new AudioContext();
+        }
+        return this.context;
+    }
+
     play(instrument: string, pitch: string): void {
+        this.playAtTime(instrument, pitch, 0);
+    }
+
+    playAtTime(instrument: string, pitch: string, time: number): void {
         const key = this.bufferKey(instrument, pitch);
         const buffer = this.buffers.get(key);
         if (!buffer) return;
@@ -33,7 +37,7 @@ export class AudioPlayerService {
         const source = ctx.createBufferSource();
         source.buffer = buffer;
         source.connect(ctx.destination);
-        source.start();
+        source.start(time);
     }
 
     private async loadSample(instrument: string, pitch: string, path: string): Promise<void> {

@@ -37,7 +37,7 @@ import { example2Song } from '../core/songs/example2.song';
                 </mat-select>
             </mat-form-field>
         </div>
-        <app-song-control-bar [bpm]="song().properties.bpm" />
+        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" />
         <app-song-track [track]="selectedTrack()" />
     `,
     styles: `
@@ -48,7 +48,7 @@ import { example2Song } from '../core/songs/example2.song';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
-    song = signal<Song>(example1Song);
+    song = signal<Song>(example2Song);
     isEditing = signal(false);
     selectedTrack = signal<Track>(this.song().tracks[0]);
 

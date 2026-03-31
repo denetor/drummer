@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, input, linkedSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, linkedSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Song } from '../../core/models/song';
+import { PlayerService } from '../../core/audio/player.service';
 
 @Component({
     selector: 'app-song-control-bar',
@@ -21,13 +23,28 @@ import { MatInputModule } from '@angular/material/input';
                 />
             </mat-form-field>
             <div class="transport-buttons">
-                <button mat-icon-button aria-label="Play">
+                <button
+                    mat-icon-button
+                    aria-label="Play"
+                    [disabled]="player.state() === 'playing'"
+                    (click)="onPlay()"
+                >
                     <mat-icon>play_arrow</mat-icon>
                 </button>
-                <button mat-icon-button aria-label="Pause">
+                <button
+                    mat-icon-button
+                    aria-label="Pause"
+                    [disabled]="player.state() !== 'playing'"
+                    (click)="player.pause()"
+                >
                     <mat-icon>pause</mat-icon>
                 </button>
-                <button mat-icon-button aria-label="Stop">
+                <button
+                    mat-icon-button
+                    aria-label="Stop"
+                    [disabled]="player.state() === 'idle'"
+                    (click)="player.stop()"
+                >
                     <mat-icon>stop</mat-icon>
                 </button>
             </div>
@@ -54,6 +71,17 @@ import { MatInputModule } from '@angular/material/input';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SongControlBarComponent {
+    song = input.required<Song>();
     bpm = input.required<number>();
     currentBpm = linkedSignal(() => this.bpm());
+
+    protected readonly player = inject(PlayerService);
+
+    onPlay(): void {
+        if (this.player.state() === 'paused') {
+            this.player.resume();
+        } else {
+            this.player.play(this.song(), this.currentBpm());
+        }
+    }
 }
