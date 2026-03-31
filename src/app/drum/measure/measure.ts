@@ -53,7 +53,15 @@ export class MeasureComponent {
                     const stepIndex = beat * stepsPerBeat + s;
                     const step = steps[stepIndex];
                     const played = step?.notes.some((n) => n.pitch === pitch) ?? false;
-                    line += played ? 'o' : '-';
+                    if (!played) {
+                        line += '-';
+                    } else {
+                        if (['C1', 'C2', 'OH', 'HH'].includes(pitch)) {
+                            line += 'x';
+                        } else {
+                            line += 'o';
+                        }
+                    }
                 }
                 line += '|';
             }

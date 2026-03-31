@@ -49,7 +49,7 @@ import { example3Song } from '../core/songs/example3.song';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
-    song = signal<Song>(example3Song);
+    song = signal<Song>(example2Song);
     isEditing = signal(false);
     selectedTrack = signal<Track>(this.song().tracks[0]);
 
