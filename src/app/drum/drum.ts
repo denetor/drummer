@@ -6,13 +6,14 @@ import { Track } from '../core/models/track';
 import { SongHeaderComponent } from './song-header/song-header';
 import { SongHeaderEditComponent } from './song-header-edit/song-header-edit';
 import { SongTrackComponent } from './song-track/song-track';
+import { SongControlBarComponent } from './song-control-bar/song-control-bar';
 import { example1Song } from '../core/songs/example1.song';
 import { example2Song } from '../core/songs/example2.song';
 
 
 @Component({
     selector: 'app-drum',
-    imports: [SongHeaderComponent, SongHeaderEditComponent, SongTrackComponent, MatFormFieldModule, MatSelectModule],
+    imports: [SongHeaderComponent, SongHeaderEditComponent, SongTrackComponent, SongControlBarComponent, MatFormFieldModule, MatSelectModule],
     template: `
         @if (isEditing()) {
             <app-song-header-edit
@@ -36,6 +37,7 @@ import { example2Song } from '../core/songs/example2.song';
                 </mat-select>
             </mat-form-field>
         </div>
+        <app-song-control-bar [bpm]="song().properties.bpm" />
         <app-song-track [track]="selectedTrack()" />
     `,
     styles: `
