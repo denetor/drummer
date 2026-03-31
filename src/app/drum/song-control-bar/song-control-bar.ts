@@ -78,6 +78,22 @@ import { PlayerService } from '../../core/audio/player.service';
             >
                 <mat-icon>download</mat-icon>
             </button>
+            <button
+                mat-icon-button
+                aria-label="Import song from JSON"
+                title="Import song from JSON"
+                (click)="fileInput.click()"
+            >
+                <mat-icon>upload</mat-icon>
+            </button>
+            <input
+                #fileInput
+                type="file"
+                accept="application/json,.json"
+                aria-hidden="true"
+                style="display:none"
+                (change)="onFileSelected($any($event.target))"
+            />
         </div>
     `,
     styles: `
@@ -114,6 +130,7 @@ export class SongControlBarComponent {
     currentBpm = linkedSignal(() => this.bpm());
     editModeChange = output<boolean>();
     bpmChange = output<number>();
+    songImport = output<Song>();
 
     protected readonly editMode = signal(false);
     protected readonly player = inject(PlayerService);
@@ -126,6 +143,22 @@ export class SongControlBarComponent {
     toggleEditMode(): void {
         this.editMode.update((v) => !v);
         this.editModeChange.emit(this.editMode());
+    }
+
+    onFileSelected(input: HTMLInputElement): void {
+        const file = input.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const song = JSON.parse(reader.result as string) as Song;
+                this.songImport.emit(song);
+            } catch {
+                // Invalid JSON — ignore silently
+            }
+        };
+        reader.readAsText(file);
+        input.value = '';
     }
 
     exportSong(): void {

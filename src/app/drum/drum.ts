@@ -39,7 +39,7 @@ import { example4Song } from '../core/songs/example4.song';
                 </mat-select>
             </mat-form-field>
         </div>
-        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" (bpmChange)="currentBpm.set($event)" />
+        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" (bpmChange)="currentBpm.set($event)" (songImport)="onSongImport($event)" />
         <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" [bpm]="currentBpm()" (newMeasure)="onNewMeasure()" (trackChange)="onTrackChange($event)" />
     `,
     styles: `
@@ -50,7 +50,7 @@ import { example4Song } from '../core/songs/example4.song';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
-    song = signal<Song>(example4Song);
+    song = signal<Song>(example1Song);
     isEditing = signal(false);
     isTrackEditing = signal(false);
     currentBpm = signal<number>(this.song().properties.bpm);
@@ -76,6 +76,14 @@ export class DrumComponent {
             tracks: s.tracks.map((t) => (t === track ? updatedTrack : t)),
         }));
         this.selectedTrack.set(updatedTrack);
+    }
+
+    onSongImport(imported: Song): void {
+        this.song.set(imported);
+        this.selectedTrack.set(imported.tracks[0]);
+        this.currentBpm.set(imported.properties.bpm);
+        this.isTrackEditing.set(false);
+        this.isEditing.set(false);
     }
 
     onTrackChange(updatedTrack: Track): void {

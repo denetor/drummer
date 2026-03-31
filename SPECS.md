@@ -135,8 +135,8 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] In edit mode, add a button to copy a measure to another one
 
 ### v0.6 — Export and import song json
-- [ ] Add an export button to SongControlBar to save the current song in json format
-- [ ] Add an import button to SongControlBar to load a json file into the current song
+- [x] Add an export button to SongControlBar to save the current song in json format
+- [x] Add an import button to SongControlBar to load a json file into the current song
 
 ### v0.7 — Connection to mock API server to rettrieve songs list and sond details
 - [ ] Mock endpoint to list songs
