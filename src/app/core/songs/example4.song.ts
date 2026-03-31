@@ -1,8 +1,8 @@
 import { Song } from '../models/song';
 
 export const example4Song: Song = {
-    artist: 'Some artist',
-    title: 'Example three',
+    artist: 'Beatles',
+    title: 'Oh darling',
     properties: { bpm: 70 },
     tracks: [
         {

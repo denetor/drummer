@@ -138,7 +138,15 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add an export button to SongControlBar to save the current song in json format
 - [x] Add an import button to SongControlBar to load a json file into the current song
 
-### v0.7 — Connection to mock API server to rettrieve songs list and sond details
+### v0.7 — BPM change
+- [ ] Reason on how to change the BPM from track-based to measure-based. Current BPM selector could be transformed in a speed multiplier
+
+### v0.8 — UI improvements
+- [ ] Allow changing beatsPerBar and stepsPerBeat for each measure
+- [ ] Better SongControlBar buttons
+- [ ] Add comments to measures, to be displayed on top or below
+
+### v0.9 — Connection to mock API server to retrieve the songs list and a song's data
 - [ ] Mock endpoint to list songs
 - [ ] List songs
 - [ ] Mock endpoint to retrieve song json
@@ -160,7 +168,6 @@ Information abount Measure representation can be found in the file `resources/me
 Tasks that don't belong to a specific milestone yet.
 - [ ] Play or loop play only a section of a track
 - [ ] Copy track sections
-- [ ] Add comments to measures to be displayed on top or below
 
 ---
 
