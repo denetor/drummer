@@ -22,14 +22,22 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
                         (editRequested)="editingMeasureIndex.set($index)"
                     />
                     @if (editMode()) {
-                        <button
-                            mat-icon-button
-                            class="duplicate-btn"
-                            [attr.aria-label]="'Duplicate measure ' + ($index + 1)"
-                            (click)="duplicateMeasure($index)"
-                        >
-                            <mat-icon>content_copy</mat-icon>
-                        </button>
+                        <div class="measure-actions">
+                            <button
+                                mat-icon-button
+                                [attr.aria-label]="'Duplicate measure ' + ($index + 1)"
+                                (click)="duplicateMeasure($index)"
+                            >
+                                <mat-icon>content_copy</mat-icon>
+                            </button>
+                            <button
+                                mat-icon-button
+                                [attr.aria-label]="'Delete measure ' + ($index + 1)"
+                                (click)="deleteMeasure($index)"
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     }
                 </div>
             }
@@ -67,6 +75,11 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
             gap: 0.25rem;
         }
 
+        .measure-actions {
+            display: flex;
+            flex-direction: row;
+        }
+
         .new-measure-btn {
             align-self: center;
         }
@@ -102,6 +115,15 @@ export class SongTrackComponent {
         const measures = [...this.track().measures];
         const copy = { ...measures[index], steps: [...measures[index].steps] };
         measures.splice(index + 1, 0, copy);
+        this.trackChange.emit({ ...this.track(), measures });
+    }
+
+    deleteMeasure(index: number): void {
+        const measures = [...this.track().measures];
+        measures.splice(index, 1);
+        if (this.editingMeasureIndex() === index) {
+            this.editingMeasureIndex.set(null);
+        }
         this.trackChange.emit({ ...this.track(), measures });
     }
 }
