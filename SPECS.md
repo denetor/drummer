@@ -128,7 +128,8 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add an `edit` toggle to SongControlBar. This will put the SongTrackComponent in edit mode
 - [x] Add a `New Measure` button at the end of SongTrackComponent. This creates a new empty measure with the same properties as the previous (but without the notes)
 - [x] Add a small `edit` icon button below each measure. This will be visible only when the track is in edit mode
-- [ ] Think the best way to edit a measure: inline changing the display mode of measures (to allow a span for each beat step) or in a modal window
+- [x] Think the best way to edit a measure: inline changing the display mode of measures (to allow a span for each beat step) or in a modal window
+- [ ] Add to MeasureEditorComponent a control to play in loop the measure currently being edited 
 
 ### v0.6 — Export and import song json
 

@@ -1,0 +1,177 @@
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { Measure } from '../../core/models/measure';
+
+const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
+
+@Component({
+    selector: 'app-measure-editor',
+    imports: [MatButtonModule, MatIconModule],
+    template: `
+        <div class="editor-panel">
+            <div class="editor-header">
+                <span class="editor-title">Edit Measure</span>
+                <button mat-icon-button aria-label="Close editor" (click)="closed.emit()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+            <div class="editor-body">
+                <div class="editor-grid" [style.grid-template-columns]="gridColumns()">
+                    <div class="pitch-label"></div>
+                    @for (beatIdx of beatIndices(); track beatIdx) {
+                        <div class="beat-header" [class.beat-start]="beatIdx > 0" [style.grid-column]="'span ' + measure().stepsPerBeat">
+                            {{ beatIdx + 1 }}
+                        </div>
+                    }
+                    @for (row of rows(); track row.pitch) {
+                        <div class="pitch-label">{{ row.pitch }}</div>
+                        @for (cell of row.cells; track cell.stepIndex) {
+                            <button
+                                class="step-btn"
+                                [class.step-active]="cell.active"
+                                [class.beat-start]="cell.isFirstInBeat && cell.beatIndex > 0"
+                                [attr.aria-label]="row.pitch + ' beat ' + (cell.beatIndex + 1) + ' step ' + (cell.stepInBeat + 1)"
+                                [attr.aria-pressed]="cell.active"
+                                (click)="toggle(row.pitch, cell.stepIndex)"
+                            ></button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    `,
+    styles: `
+        .editor-panel {
+            margin: 0 1.5rem 1rem;
+            border: 1px solid var(--mat-sys-outline-variant);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--mat-sys-surface);
+        }
+
+        .editor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.25rem 0.25rem 0.25rem 1rem;
+            background: var(--mat-sys-surface-variant);
+            border-bottom: 1px solid var(--mat-sys-outline-variant);
+        }
+
+        .editor-title {
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .editor-body {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        .editor-grid {
+            display: grid;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .pitch-label {
+            font-family: monospace;
+            font-size: 0.75rem;
+            text-align: right;
+            padding-right: 0.5rem;
+            color: var(--mat-sys-on-surface-variant);
+            white-space: nowrap;
+        }
+
+        .beat-header {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--mat-sys-on-surface-variant);
+            padding: 0.125rem 0 0.375rem;
+
+            &.beat-start {
+                border-left: 2px solid var(--mat-sys-outline-variant);
+                margin-left: 0.25rem;
+                padding-left: 0.25rem;
+            }
+        }
+
+        .step-btn {
+            width: 100%;
+            min-width: 2.75rem;
+            height: 2.75rem;
+            border: 1px solid var(--mat-sys-outline-variant);
+            border-radius: 4px;
+            background: var(--mat-sys-surface-container-low);
+            cursor: pointer;
+            transition: background-color 0.1s, border-color 0.1s;
+            padding: 0;
+
+            &.beat-start {
+                border-left: 2px solid var(--mat-sys-outline);
+                margin-left: 0.25rem;
+            }
+
+            &.step-active {
+                background: var(--mat-sys-primary);
+                border-color: var(--mat-sys-primary);
+            }
+
+            &:hover:not(.step-active) {
+                background: var(--mat-sys-primary-container);
+                border-color: var(--mat-sys-primary);
+            }
+
+            &:focus-visible {
+                outline: 2px solid var(--mat-sys-primary);
+                outline-offset: 2px;
+            }
+        }
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MeasureEditorComponent {
+    measure = input.required<Measure>();
+    measureChange = output<Measure>();
+    closed = output<void>();
+
+    gridColumns = computed(() => {
+        const { beatsPerBar, stepsPerBeat } = this.measure();
+        return `2.5rem repeat(${beatsPerBar * stepsPerBeat}, minmax(2.75rem, 1fr))`;
+    });
+
+    beatIndices = computed(() =>
+        Array.from({ length: this.measure().beatsPerBar }, (_, i) => i)
+    );
+
+    rows = computed(() => {
+        const { beatsPerBar, stepsPerBeat, steps } = this.measure();
+        return DRUM_PITCHES.map((pitch) => ({
+            pitch,
+            cells: Array.from({ length: beatsPerBar * stepsPerBeat }, (_, i) => ({
+                stepIndex: i,
+                beatIndex: Math.floor(i / stepsPerBeat),
+                stepInBeat: i % stepsPerBeat,
+                isFirstInBeat: i % stepsPerBeat === 0,
+                active: steps[i]?.notes.some((n) => n.pitch === pitch) ?? false,
+            })),
+        }));
+    });
+
+    toggle(pitch: string, stepIndex: number): void {
+        const measure = this.measure();
+        const steps = [...measure.steps];
+        const step = steps[stepIndex];
+        const isActive = step?.notes.some((n) => n.pitch === pitch) ?? false;
+
+        if (isActive) {
+            steps[stepIndex] = { ...step, notes: step.notes.filter((n) => n.pitch !== pitch) };
+        } else {
+            steps[stepIndex] = { notes: [...(step?.notes ?? []), { pitch, velocity: 100 }] };
+        }
+
+        this.measureChange.emit({ ...measure, steps });
+    }
+}

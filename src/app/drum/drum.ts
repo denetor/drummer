@@ -39,7 +39,7 @@ import { example3Song } from '../core/songs/example3.song';
             </mat-form-field>
         </div>
         <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" />
-        <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" (newMeasure)="onNewMeasure()" />
+        <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" (newMeasure)="onNewMeasure()" (trackChange)="onTrackChange($event)" />
     `,
     styles: `
         .track-selector {
@@ -72,6 +72,15 @@ export class DrumComponent {
         this.song.update((s) => ({
             ...s,
             tracks: s.tracks.map((t) => (t === track ? updatedTrack : t)),
+        }));
+        this.selectedTrack.set(updatedTrack);
+    }
+
+    onTrackChange(updatedTrack: Track): void {
+        const currentTrack = this.selectedTrack();
+        this.song.update((s) => ({
+            ...s,
+            tracks: s.tracks.map((t) => (t === currentTrack ? updatedTrack : t)),
         }));
         this.selectedTrack.set(updatedTrack);
     }
