@@ -154,7 +154,7 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Clearer loop-play button in MeasureEditorComponent
 - [ ] Add playback speed multiplier to slow down or speed up the current song
 - [ ] Collapsable songs sidebar
-- [ ] Highlight the playing step cells during play-loop in measure editor
+- [x] Highlight the playing step cells during play-loop in measure editor
 
 ### v1.0 — Release
 - [x] Deploy scripts

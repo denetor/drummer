@@ -88,6 +88,7 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                             <button
                                 class="step-btn"
                                 [class.step-active]="cell.active"
+                                [class.step-playing]="player.currentStepIndex() === cell.stepIndex"
                                 [class.beat-start]="cell.isFirstInBeat && cell.beatIndex > 0"
                                 [attr.aria-label]="
                                     row.pitch +
@@ -217,6 +218,16 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
             &.step-active {
                 background: var(--mat-sys-primary);
                 border-color: var(--mat-sys-primary);
+            }
+
+            &.step-playing {
+                outline: 2px solid var(--mat-sys-tertiary);
+                outline-offset: 1px;
+            }
+
+            &.step-active.step-playing {
+                background: var(--mat-sys-tertiary);
+                border-color: var(--mat-sys-tertiary);
             }
 
             &:hover:not(.step-active) {

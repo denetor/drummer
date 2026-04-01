@@ -11,6 +11,7 @@ export class PlayerService {
 
     readonly state = signal<PlayerState>('idle');
     readonly currentMeasureIndex = signal<number>(-1);
+    readonly currentStepIndex = signal<number>(-1);
     readonly metronomeEnabled = signal<boolean>(false);
     readonly currentBpm = signal<number>(120);
 
@@ -83,6 +84,7 @@ export class PlayerService {
         this.stepIndex = 0;
         this.state.set('idle');
         this.currentMeasureIndex.set(-1);
+        this.currentStepIndex.set(-1);
     }
 
     private startScheduler(): void {
@@ -107,6 +109,7 @@ export class PlayerService {
 
     private scheduleStep(time: number): void {
         if (!this.song) return;
+        this.currentStepIndex.set(this.stepIndex);
         for (const track of this.song.tracks) {
             const measure = track.measures[this.measureIndex];
             if (!measure) continue;
