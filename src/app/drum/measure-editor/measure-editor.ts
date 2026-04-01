@@ -27,6 +27,17 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                 </button>
             </div>
             <div class="bpm-bar">
+                <mat-form-field appearance="outline" class="caption-field">
+                    <mat-label>Caption</mat-label>
+                    <input
+                        matInput
+                        type="text"
+                        [value]="measure().caption ?? ''"
+                        (change)="updateCaption($any($event.target).value)"
+                        aria-label="Measure caption"
+                        placeholder="optional label"
+                    />
+                </mat-form-field>
                 <mat-slide-toggle
                     [checked]="measure().bpm !== undefined"
                     (change)="toggleBpmOverride($event.checked)"
@@ -141,6 +152,10 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
             padding: 0.5rem 1rem;
             border-bottom: 1px solid var(--mat-sys-outline-variant);
             background: var(--mat-sys-surface-container-low);
+        }
+
+        .caption-field {
+            width: 14rem;
         }
 
         .bpm-field {
@@ -279,6 +294,17 @@ export class MeasureEditorComponent {
             this.measureChange.emit({ ...this.measure(), bpm: this.songBpm() });
         } else {
             const { bpm: _removed, ...rest } = this.measure();
+            this.measureChange.emit(rest as Measure);
+        }
+    }
+
+    updateCaption(value: string): void {
+        const trimmed = value.trim();
+        const measure = this.measure();
+        if (trimmed) {
+            this.measureChange.emit({ ...measure, caption: trimmed });
+        } else {
+            const { caption: _removed, ...rest } = measure;
             this.measureChange.emit(rest as Measure);
         }
     }

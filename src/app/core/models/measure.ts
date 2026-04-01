@@ -6,4 +6,5 @@ export interface Measure {
     stepsPerBeat: number;
     steps: Step[];
     bpm?: number;
+    caption?: string;
 }

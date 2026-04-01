@@ -149,7 +149,7 @@ Information abount Measure representation can be found in the file `resources/me
 
 ### v0.9 — UI improvements
 - [x] Better SongControlBar buttons
-- [ ] Add comments to measures, to be displayed on top or below
+- [x] Add comments to measures, to be displayed on top or below
 - [x] In MeasureEditorComponent, add a button to clear all cells 
 - [x] Clearer loop-play button in MeasureEditorComponent
 - [ ] Add playback speed multiplier to slow down or speed up the current song

@@ -10,7 +10,13 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
 
 @Component({
     selector: 'app-song-track',
-    imports: [MeasureComponent, MeasureEditorComponent, MatButtonModule, MatIconModule, MatTooltipModule],
+    imports: [
+        MeasureComponent,
+        MeasureEditorComponent,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+    ],
     template: `
         <div class="song-track">
             @if (movingMeasureIndex() !== null && isValidDropZone(0)) {
@@ -26,10 +32,14 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
             }
 
             @for (measure of track().measures; track $index) {
-                <div
-                    class="measure-wrapper"
-                    [class.is-moving]="movingMeasureIndex() === $index"
-                >
+                <div class="measure-wrapper" [class.is-moving]="movingMeasureIndex() === $index">
+                    <span class="measure-caption">
+                        @if (measure.caption) {
+                            {{ measure.caption }}
+                        } @else {
+                            &nbsp;
+                        }
+                    </span>
                     <app-measure
                         [measure]="measure"
                         [instrument]="track().instrument"
@@ -66,11 +76,7 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
                         </div>
                     }
                     @if (editMode() && movingMeasureIndex() === $index) {
-                        <button
-                            mat-stroked-button
-                            class="cancel-move-btn"
-                            (click)="cancelMove()"
-                        >
+                        <button mat-stroked-button class="cancel-move-btn" (click)="cancelMove()">
                             Cancel
                         </button>
                     }
@@ -124,6 +130,17 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
             transition: opacity 0.2s;
         }
 
+        .measure-caption {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--mat-sys-on-surface-variant);
+            text-align: center;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .measure-wrapper.is-moving {
             opacity: 0.4;
             outline: 2px dashed currentColor;
@@ -145,8 +162,14 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
         }
 
         @keyframes pulse {
-            from { opacity: 0.5; transform: scale(0.9); }
-            to   { opacity: 1;   transform: scale(1.1); }
+            from {
+                opacity: 0.5;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1.1);
+            }
         }
 
         .new-measure-btn {
