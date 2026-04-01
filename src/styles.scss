@@ -36,4 +36,15 @@ body {
     margin: 0;
     height: 100%;
 }
+app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+app-drum {
+    flex: 1;
+    min-height: 0;
+    display: block;
+}
 /* You can add global styles to this file, and also import other style files */

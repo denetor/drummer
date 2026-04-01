@@ -1,48 +1,124 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { Song } from '../core/models/song';
+import { SongSummary } from '../core/models/song-summary';
 import { Track } from '../core/models/track';
+import { SongApiService } from '../core/songs/song-api.service';
 import { SongHeaderComponent } from './song-header/song-header';
 import { SongHeaderEditComponent } from './song-header-edit/song-header-edit';
 import { SongTrackComponent } from './song-track/song-track';
 import { SongControlBarComponent } from './song-control-bar/song-control-bar';
 import { example1Song } from '../core/songs/example1.song';
-import { example2Song } from '../core/songs/example2.song';
-import { example3Song } from '../core/songs/example3.song';
-import { example4Song } from '../core/songs/example4.song';
-
 
 @Component({
     selector: 'app-drum',
-    imports: [SongHeaderComponent, SongHeaderEditComponent, SongTrackComponent, SongControlBarComponent, MatFormFieldModule, MatSelectModule],
+    imports: [
+        SongHeaderComponent,
+        SongHeaderEditComponent,
+        SongTrackComponent,
+        SongControlBarComponent,
+        MatFormFieldModule,
+        MatListModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatSidenavModule,
+    ],
     template: `
-        @if (isEditing()) {
-            <app-song-header-edit
-                [song]="song()"
-                (save)="onSave($event)"
-                (cancel)="isEditing.set(false)"
-            />
-        } @else {
-            <app-song-header [song]="song()" (editRequested)="isEditing.set(true)" />
-        }
-        <div class="track-selector">
-            <mat-form-field appearance="outline">
-                <mat-label>Track</mat-label>
-                <mat-select
-                    [value]="selectedTrack()"
-                    (valueChange)="selectedTrack.set($event)"
-                >
-                    @for (track of song().tracks; track track.instrument) {
-                        <mat-option [value]="track">{{ track.instrument }}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <app-song-control-bar [song]="song()" [bpm]="song().properties.bpm" (editModeChange)="isTrackEditing.set($event)" (bpmChange)="currentBpm.set($event)" (songImport)="onSongImport($event)" />
-        <app-song-track [track]="selectedTrack()" [editMode]="isTrackEditing()" [bpm]="currentBpm()" (newMeasure)="onNewMeasure()" (trackChange)="onTrackChange($event)" />
+        <mat-sidenav-container class="sidenav-container">
+            <mat-sidenav mode="side" opened class="songs-sidenav">
+                <div class="sidenav-title">Songs</div>
+                @if (songList() === undefined) {
+                    <div class="sidenav-loading">
+                        <mat-spinner diameter="32" />
+                    </div>
+                } @else {
+                    <mat-nav-list>
+                        @for (item of songList(); track item.id) {
+                            <a
+                                mat-list-item
+                                [activated]="activeSongId() === item.id"
+                                (click)="loadSong(item)"
+                            >
+                                <span matListItemTitle>{{ item.title }}</span>
+                                <span matListItemLine>{{ item.artist }}</span>
+                            </a>
+                        }
+                    </mat-nav-list>
+                }
+            </mat-sidenav>
+
+            <mat-sidenav-content>
+                @if (isEditing()) {
+                    <app-song-header-edit
+                        [song]="song()"
+                        (save)="onSave($event)"
+                        (cancel)="isEditing.set(false)"
+                    />
+                } @else {
+                    <app-song-header [song]="song()" (editRequested)="isEditing.set(true)" />
+                }
+                <div class="track-selector">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Track</mat-label>
+                        <mat-select
+                            [value]="selectedTrack()"
+                            (valueChange)="selectedTrack.set($event)"
+                        >
+                            @for (track of song().tracks; track track.instrument) {
+                                <mat-option [value]="track">{{ track.instrument }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <app-song-control-bar
+                    [song]="song()"
+                    [bpm]="song().properties.bpm"
+                    (editModeChange)="isTrackEditing.set($event)"
+                    (bpmChange)="currentBpm.set($event)"
+                    (songImport)="onSongImport($event)"
+                />
+                <app-song-track
+                    [track]="selectedTrack()"
+                    [editMode]="isTrackEditing()"
+                    [bpm]="currentBpm()"
+                    (newMeasure)="onNewMeasure()"
+                    (trackChange)="onTrackChange($event)"
+                />
+            </mat-sidenav-content>
+        </mat-sidenav-container>
     `,
     styles: `
+        .sidenav-container {
+            height: 100%;
+        }
+
+        .songs-sidenav {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--mat-sys-outline-variant);
+        }
+
+        .sidenav-title {
+            padding: 1rem 1rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--mat-sys-on-surface-variant);
+        }
+
+        .sidenav-loading {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
         .track-selector {
             padding: 0 1.5rem;
         }
@@ -50,11 +126,27 @@ import { example4Song } from '../core/songs/example4.song';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrumComponent {
+    private readonly songApi = inject(SongApiService);
+    private readonly destroyRef = inject(DestroyRef);
+
     song = signal<Song>(example1Song);
     isEditing = signal(false);
     isTrackEditing = signal(false);
     currentBpm = signal<number>(this.song().properties.bpm);
     selectedTrack = signal<Track>(this.song().tracks[0]);
+    activeSongId = signal<string | null>(null);
+
+    songList = toSignal(this.songApi.getSongs());
+
+    loadSong(item: SongSummary): void {
+        this.songApi
+            .getSong(item.id)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((song) => {
+                this.onSongImport(song);
+                this.activeSongId.set(item.id);
+            });
+    }
 
     onSave(updated: Song): void {
         this.song.set(updated);
