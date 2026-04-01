@@ -143,9 +143,9 @@ Information abount Measure representation can be found in the file `resources/me
 
 ### v0.8 — Connection to mock API server to retrieve the songs list and a song's data
 - [x] Mock endpoint to list songs
-- [ ] List songs
+- [x] List songs
 - [x] Mock endpoint to retrieve song json
-- [ ] Load song
+- [x] Load song
 
 ### v0.9 — UI improvements
 - [ ] Allow changing beatsPerBar and stepsPerBeat for each measure

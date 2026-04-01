@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { Song } from '../core/models/song';
 import { SongSummary } from '../core/models/song-summary';
 import { Track } from '../core/models/track';
+import { PlayerService } from '../core/audio/player.service';
 import { SongApiService } from '../core/songs/song-api.service';
 import { SongHeaderComponent } from './song-header/song-header';
 import { SongHeaderEditComponent } from './song-header-edit/song-header-edit';
@@ -127,6 +128,7 @@ import { example1Song } from '../core/songs/example1.song';
 })
 export class DrumComponent {
     private readonly songApi = inject(SongApiService);
+    private readonly player = inject(PlayerService);
     private readonly destroyRef = inject(DestroyRef);
 
     song = signal<Song>(example1Song);
@@ -171,6 +173,10 @@ export class DrumComponent {
     }
 
     onSongImport(imported: Song): void {
+        if (this.player.state() !== 'idle') {
+            this.player.stop();
+        }
+        this.player.metronomeEnabled.set(false);
         this.song.set(imported);
         this.selectedTrack.set(imported.tracks[0]);
         this.currentBpm.set(imported.properties.bpm);
