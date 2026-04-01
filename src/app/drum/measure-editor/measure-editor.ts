@@ -22,16 +22,6 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
         <div class="editor-panel">
             <div class="editor-header">
                 <span class="editor-title">Edit Measure</span>
-                <button
-                    mat-icon-button
-                    [attr.aria-label]="player.state() === 'playing' ? 'Stop loop' : 'Play loop'"
-                    [attr.aria-pressed]="player.state() === 'playing'"
-                    [class.loop-active]="player.state() === 'playing'"
-                    (click)="toggleLoop()"
-                    title="Loop measure"
-                >
-                    <mat-icon>{{ player.state() === 'playing' ? 'stop' : 'play_arrow' }}</mat-icon>
-                </button>
                 <button mat-icon-button aria-label="Close editor" (click)="closed.emit()">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -59,6 +49,26 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                 @if (measure().bpm === undefined) {
                     <span class="bpm-inherited">Inherited from song: {{ songBpm() }}</span>
                 }
+                <div class="bpm-bar-actions">
+                    <button
+                        mat-icon-button
+                        aria-label="Clear all cells"
+                        title="Clear all cells"
+                        (click)="clearAll()"
+                    >
+                        <mat-icon>delete_sweep</mat-icon>
+                    </button>
+                    <button
+                        mat-icon-button
+                        [attr.aria-label]="player.state() === 'playing' ? 'Stop loop' : 'Play loop'"
+                        [attr.aria-pressed]="player.state() === 'playing'"
+                        [class.loop-active]="player.state() === 'playing'"
+                        (click)="toggleLoop()"
+                        title="Loop measure"
+                    >
+                        <mat-icon>{{ player.state() === 'playing' ? 'stop' : 'play_arrow' }}</mat-icon>
+                    </button>
+                </div>
             </div>
             <div class="editor-body">
                 <div class="editor-grid" [style.grid-template-columns]="gridColumns()">
@@ -143,6 +153,13 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
         .bpm-inherited {
             font-size: 0.8125rem;
             color: var(--mat-sys-on-surface-variant);
+        }
+
+        .bpm-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-left: auto;
         }
 
         .editor-body {
@@ -282,6 +299,15 @@ export class MeasureEditorComponent {
             })),
         }));
     });
+
+    clearAll(): void {
+        const measure = this.measure();
+        const updated: Measure = { ...measure, steps: measure.steps.map(() => ({ notes: [] })) };
+        if (this.player.state() === 'playing') {
+            this.player.updateLoopMeasure(updated);
+        }
+        this.measureChange.emit(updated);
+    }
 
     toggle(pitch: string, stepIndex: number): void {
         const measure = this.measure();
