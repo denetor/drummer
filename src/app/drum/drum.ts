@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,7 +25,9 @@ import { example1Song } from '../core/songs/example1.song';
         SongHeaderEditComponent,
         SongTrackComponent,
         SongControlBarComponent,
+        MatButtonModule,
         MatFormFieldModule,
+        MatIconModule,
         MatListModule,
         MatProgressSpinnerModule,
         MatSelectModule,
@@ -31,8 +35,18 @@ import { example1Song } from '../core/songs/example1.song';
     ],
     template: `
         <mat-sidenav-container class="sidenav-container">
-            <mat-sidenav mode="side" opened class="songs-sidenav">
-                <div class="sidenav-title">Songs</div>
+            <mat-sidenav mode="side" [opened]="sidenavOpen()" class="songs-sidenav">
+                <div class="sidenav-title">
+                    <span>Songs</span>
+                    <button
+                        mat-icon-button
+                        aria-label="Collapse song list"
+                        title="Collapse"
+                        (click)="sidenavOpen.set(false)"
+                    >
+                        <mat-icon>chevron_left</mat-icon>
+                    </button>
+                </div>
                 @if (songList() === undefined) {
                     <div class="sidenav-loading">
                         <mat-spinner diameter="32" />
@@ -54,6 +68,17 @@ import { example1Song } from '../core/songs/example1.song';
             </mat-sidenav>
 
             <mat-sidenav-content>
+                @if (!sidenavOpen()) {
+                    <button
+                        mat-icon-button
+                        class="sidenav-open-btn"
+                        aria-label="Expand song list"
+                        title="Expand song list"
+                        (click)="sidenavOpen.set(true)"
+                    >
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                }
                 @if (isEditing()) {
                     <app-song-header-edit
                         [song]="song()"
@@ -106,12 +131,25 @@ import { example1Song } from '../core/songs/example1.song';
         }
 
         .sidenav-title {
-            padding: 1rem 1rem 0.5rem;
+            display: flex;
+            align-items: center;
+            padding: 0.25rem 0.25rem 0.25rem 1rem;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--mat-sys-on-surface-variant);
+
+            span {
+                flex: 1;
+            }
+        }
+
+        .sidenav-open-btn {
+            position: absolute;
+            top: 0.25rem;
+            left: 0.25rem;
+            z-index: 1;
         }
 
         .sidenav-loading {
@@ -132,6 +170,7 @@ export class DrumComponent {
     private readonly destroyRef = inject(DestroyRef);
 
     song = signal<Song>(example1Song);
+    sidenavOpen = signal(true);
     isEditing = signal(false);
     isTrackEditing = signal(false);
     currentBpm = signal<number>(this.song().properties.bpm);
@@ -147,6 +186,7 @@ export class DrumComponent {
             .subscribe((song) => {
                 this.onSongImport(song);
                 this.activeSongId.set(item.id);
+                this.sidenavOpen.set(false);
             });
     }
 
