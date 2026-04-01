@@ -11,7 +11,13 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
 @Component({
     selector: 'app-measure-editor',
-    imports: [MatButtonModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatInputModule],
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
     template: `
         <div class="editor-panel">
             <div class="editor-header">
@@ -24,7 +30,7 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                     (click)="toggleLoop()"
                     title="Loop measure"
                 >
-                    <mat-icon>{{ player.state() === 'playing' ? 'stop' : 'loop' }}</mat-icon>
+                    <mat-icon>{{ player.state() === 'playing' ? 'stop' : 'play_arrow' }}</mat-icon>
                 </button>
                 <button mat-icon-button aria-label="Close editor" (click)="closed.emit()">
                     <mat-icon>close</mat-icon>
@@ -58,7 +64,11 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                 <div class="editor-grid" [style.grid-template-columns]="gridColumns()">
                     <div class="pitch-label"></div>
                     @for (beatIdx of beatIndices(); track beatIdx) {
-                        <div class="beat-header" [class.beat-start]="beatIdx > 0" [style.grid-column]="'span ' + measure().stepsPerBeat">
+                        <div
+                            class="beat-header"
+                            [class.beat-start]="beatIdx > 0"
+                            [style.grid-column]="'span ' + measure().stepsPerBeat"
+                        >
                             {{ beatIdx + 1 }}
                         </div>
                     }
@@ -69,7 +79,13 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                                 class="step-btn"
                                 [class.step-active]="cell.active"
                                 [class.beat-start]="cell.isFirstInBeat && cell.beatIndex > 0"
-                                [attr.aria-label]="row.pitch + ' beat ' + (cell.beatIndex + 1) + ' step ' + (cell.stepInBeat + 1)"
+                                [attr.aria-label]="
+                                    row.pitch +
+                                    ' beat ' +
+                                    (cell.beatIndex + 1) +
+                                    ' step ' +
+                                    (cell.stepInBeat + 1)
+                                "
                                 [attr.aria-pressed]="cell.active"
                                 (click)="toggle(row.pitch, cell.stepIndex)"
                             ></button>
@@ -171,7 +187,9 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
             border-radius: 4px;
             background: var(--mat-sys-surface-container-low);
             cursor: pointer;
-            transition: background-color 0.1s, border-color 0.1s;
+            transition:
+                background-color 0.1s,
+                border-color 0.1s;
             padding: 0;
 
             &.beat-start {
@@ -220,7 +238,11 @@ export class MeasureEditorComponent {
         if (this.player.state() === 'playing') {
             this.player.stop();
         } else {
-            await this.player.playMeasureLoop(this.measure(), this.instrument(), this.effectiveBpm());
+            await this.player.playMeasureLoop(
+                this.measure(),
+                this.instrument(),
+                this.effectiveBpm(),
+            );
         }
     }
 
@@ -245,9 +267,7 @@ export class MeasureEditorComponent {
         return `2.5rem repeat(${beatsPerBar * stepsPerBeat}, minmax(2.75rem, 1fr))`;
     });
 
-    beatIndices = computed(() =>
-        Array.from({ length: this.measure().beatsPerBar }, (_, i) => i)
-    );
+    beatIndices = computed(() => Array.from({ length: this.measure().beatsPerBar }, (_, i) => i));
 
     rows = computed(() => {
         const { beatsPerBar, stepsPerBeat, steps } = this.measure();

@@ -151,9 +151,10 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Better SongControlBar buttons
 - [ ] Add comments to measures, to be displayed on top or below
 - [ ] In MeasureEditorComponent, add a button to clear all cells 
-- [ ] Clearer loop-play button in MeasureEditorComponent
+- [x] Clearer loop-play button in MeasureEditorComponent
 - [ ] Add playback speed multiplier to slow down or speed up the current song
 - [ ] Collapsable songs sidebar
+- [ ] Highlight the playing step cells during play-loop in measure editor
 
 ### v1.0 — Release
 - [ ] Deploy scripts
