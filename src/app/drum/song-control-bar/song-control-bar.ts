@@ -59,41 +59,43 @@ import { PlayerService } from '../../core/audio/player.service';
             >
                 <mat-icon>music_note</mat-icon>
             </button>
-            <button
-                mat-icon-button
-                [attr.aria-label]="editMode() ? 'Exit edit mode' : 'Enter edit mode'"
-                [attr.aria-pressed]="editMode()"
-                [class.edit-active]="editMode()"
-                [disabled]="player.state() === 'playing'"
-                (click)="toggleEditMode()"
-                title="Toggle edit mode"
-            >
-                <mat-icon>{{ editMode() ? 'edit_off' : 'edit' }}</mat-icon>
-            </button>
-            <button
-                mat-icon-button
-                aria-label="Export song as JSON"
-                title="Export song as JSON"
-                (click)="exportSong()"
-            >
-                <mat-icon>download</mat-icon>
-            </button>
-            <button
-                mat-icon-button
-                aria-label="Import song from JSON"
-                title="Import song from JSON"
-                (click)="fileInput.click()"
-            >
-                <mat-icon>upload</mat-icon>
-            </button>
-            <input
-                #fileInput
-                type="file"
-                accept="application/json,.json"
-                aria-hidden="true"
-                style="display:none"
-                (change)="onFileSelected($any($event.target))"
-            />
+            <div class="song-actions">
+                <button
+                    mat-icon-button
+                    [attr.aria-label]="editMode() ? 'Exit edit mode' : 'Enter edit mode'"
+                    [attr.aria-pressed]="editMode()"
+                    [class.edit-active]="editMode()"
+                    [disabled]="player.state() === 'playing'"
+                    (click)="toggleEditMode()"
+                    title="Toggle edit mode"
+                >
+                    <mat-icon>{{ editMode() ? 'edit_off' : 'edit' }}</mat-icon>
+                </button>
+                <button
+                    mat-icon-button
+                    aria-label="Import song from JSON"
+                    title="Import song from JSON"
+                    (click)="fileInput.click()"
+                >
+                    <mat-icon>upload</mat-icon>
+                </button>
+                <button
+                    mat-icon-button
+                    aria-label="Export song as JSON"
+                    title="Export song as JSON"
+                    (click)="exportSong()"
+                >
+                    <mat-icon>download</mat-icon>
+                </button>
+                <input
+                    #fileInput
+                    type="file"
+                    accept="application/json,.json"
+                    aria-hidden="true"
+                    style="display:none"
+                    (change)="onFileSelected($any($event.target))"
+                />
+            </div>
         </div>
     `,
     styles: `
@@ -120,6 +122,13 @@ import { PlayerService } from '../../core/audio/player.service';
 
         .edit-active {
             color: var(--mat-sys-primary);
+        }
+
+        .song-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-left: auto;
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,

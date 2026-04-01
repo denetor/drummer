@@ -148,12 +148,12 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Load song
 
 ### v0.9 — UI improvements
-- [ ] Allow changing beatsPerBar and stepsPerBeat for each measure
-- [ ] Better SongControlBar buttons
+- [x] Better SongControlBar buttons
 - [ ] Add comments to measures, to be displayed on top or below
 - [ ] In MeasureEditorComponent, add a button to clear all cells 
 - [ ] Clearer loop-play button in MeasureEditorComponent
-- [ ] Add playback speed multiplier to slow down or speed up the current song 
+- [ ] Add playback speed multiplier to slow down or speed up the current song
+- [ ] Collapsable songs sidebar
 
 ### v1.0 — Release
 - [ ] Deploy scripts
