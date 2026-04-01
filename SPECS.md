@@ -142,9 +142,9 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Allow changing the BPM for single measures.
 
 ### v0.8 — Connection to mock API server to retrieve the songs list and a song's data
-- [ ] Mock endpoint to list songs
+- [x] Mock endpoint to list songs
 - [ ] List songs
-- [ ] Mock endpoint to retrieve song json
+- [x] Mock endpoint to retrieve song json
 - [ ] Load song
 
 ### v0.9 — UI improvements

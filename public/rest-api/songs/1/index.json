@@ -1,0 +1,132 @@
+{
+    "artist": "Some artist",
+    "title": "Example one",
+    "properties": { "bpm": 100 },
+    "tracks": [
+        {
+            "instrument": "drums",
+            "measures": [
+                {
+                    "beatsPerBar": 4,
+                    "beatUnit": 4,
+                    "stepsPerBeat": 2,
+                    "steps": [
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] }
+                    ]
+                },
+                {
+                    "beatsPerBar": 4,
+                    "beatUnit": 4,
+                    "stepsPerBeat": 2,
+                    "steps": [
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] }
+                    ]
+                },
+                {
+                    "beatsPerBar": 4,
+                    "beatUnit": 4,
+                    "stepsPerBeat": 2,
+                    "steps": [
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] }
+                    ]
+                }
+            ]
+        }
+    ]
+}

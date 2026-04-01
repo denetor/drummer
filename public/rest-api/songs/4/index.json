@@ -1,0 +1,124 @@
+{
+    "artist": "Beatles",
+    "title": "Oh darling",
+    "properties": { "bpm": 70 },
+    "tracks": [
+        {
+            "instrument": "drums",
+            "measures": [
+                {
+                    "beatsPerBar": 4,
+                    "beatUnit": 4,
+                    "stepsPerBeat": 6,
+                    "steps": [
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] }
+                    ]
+                },
+                {
+                    "beatsPerBar": 4,
+                    "beatUnit": 4,
+                    "stepsPerBeat": 6,
+                    "steps": [
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "BS" }
+                            ]
+                        },
+                        { "notes": [] },
+                        {
+                            "notes": [
+                                { "velocity": 64, "pitch": "HH" },
+                                { "velocity": 64, "pitch": "SN" }
+                            ]
+                        },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] },
+                        { "notes": [{ "velocity": 64, "pitch": "HH" }] },
+                        { "notes": [] }
+                    ]
+                }
+            ]
+        }
+    ]
+}

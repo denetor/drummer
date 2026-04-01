@@ -1,0 +1,22 @@
+[
+    {
+        "id": "1",
+        "artist": "Some artist",
+        "title": "Example one"
+    },
+    {
+        "id": "2",
+        "artist": "Some other artist",
+        "title": "Example two"
+    },
+    {
+        "id": "3",
+        "artist": "Some artist",
+        "title": "Example three"
+    },
+    {
+        "id": "4",
+        "artist": "The beatles",
+        "title": "Oh, darling"
+    }
+]
