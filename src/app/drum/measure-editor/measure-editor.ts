@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Measure } from '../../core/models/measure';
 import { PlayerService } from '../../core/audio/player.service';
 
@@ -8,7 +11,7 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
 @Component({
     selector: 'app-measure-editor',
-    imports: [MatButtonModule, MatIconModule],
+    imports: [MatButtonModule, MatIconModule, MatSlideToggleModule, MatFormFieldModule, MatInputModule],
     template: `
         <div class="editor-panel">
             <div class="editor-header">
@@ -26,6 +29,30 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
                 <button mat-icon-button aria-label="Close editor" (click)="closed.emit()">
                     <mat-icon>close</mat-icon>
                 </button>
+            </div>
+            <div class="bpm-bar">
+                <mat-slide-toggle
+                    [checked]="measure().bpm !== undefined"
+                    (change)="toggleBpmOverride($event.checked)"
+                >
+                    Custom BPM
+                </mat-slide-toggle>
+                @if (measure().bpm !== undefined) {
+                    <mat-form-field appearance="outline" class="bpm-field">
+                        <mat-label>BPM</mat-label>
+                        <input
+                            matInput
+                            type="number"
+                            min="1"
+                            [value]="measure().bpm"
+                            (change)="updateBpm($event)"
+                            aria-label="Measure BPM override"
+                        />
+                    </mat-form-field>
+                }
+                @if (measure().bpm === undefined) {
+                    <span class="bpm-inherited">Inherited from song: {{ songBpm() }}</span>
+                }
             </div>
             <div class="editor-body">
                 <div class="editor-grid" [style.grid-template-columns]="gridColumns()">
@@ -78,6 +105,28 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
         .loop-active {
             color: var(--mat-sys-primary);
+        }
+
+        .bpm-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--mat-sys-outline-variant);
+            background: var(--mat-sys-surface-container-low);
+        }
+
+        .bpm-field {
+            width: 7rem;
+
+            ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+                display: none;
+            }
+        }
+
+        .bpm-inherited {
+            font-size: 0.8125rem;
+            color: var(--mat-sys-on-surface-variant);
         }
 
         .editor-body {
@@ -151,11 +200,13 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 export class MeasureEditorComponent {
     measure = input.required<Measure>();
     instrument = input.required<string>();
-    bpm = input.required<number>();
+    songBpm = input.required<number>();
     measureChange = output<Measure>();
     closed = output<void>();
 
     protected readonly player = inject(PlayerService);
+
+    private effectiveBpm = computed(() => this.measure().bpm ?? this.songBpm());
 
     constructor() {
         inject(DestroyRef).onDestroy(() => {
@@ -169,7 +220,23 @@ export class MeasureEditorComponent {
         if (this.player.state() === 'playing') {
             this.player.stop();
         } else {
-            await this.player.playMeasureLoop(this.measure(), this.instrument(), this.bpm());
+            await this.player.playMeasureLoop(this.measure(), this.instrument(), this.effectiveBpm());
+        }
+    }
+
+    toggleBpmOverride(enable: boolean): void {
+        if (enable) {
+            this.measureChange.emit({ ...this.measure(), bpm: this.songBpm() });
+        } else {
+            const { bpm: _removed, ...rest } = this.measure();
+            this.measureChange.emit(rest as Measure);
+        }
+    }
+
+    updateBpm(event: Event): void {
+        const value = Number((event.target as HTMLInputElement).value);
+        if (value > 0) {
+            this.measureChange.emit({ ...this.measure(), bpm: value });
         }
     }
 

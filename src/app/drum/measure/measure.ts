@@ -10,12 +10,20 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
     imports: [MatButtonModule, MatIconModule],
     template: `
         <div class="measure-wrapper">
+            <div class="measure-bpm">
+                @if (measure().bpm !== undefined) {
+                    &#9834;= {{ measure().bpm }}
+                } @else {
+                    &nbsp;
+                }
+            </div>
             <pre
                 class="measure-tab"
                 role="img"
                 [attr.aria-label]="ariaLabel()"
                 [class.active]="active()"
-            >{{ tabText() }}</pre>
+                >{{ tabText() }}</pre
+            >
             @if (editMode()) {
                 <button
                     mat-icon-button
@@ -47,6 +55,13 @@ const DRUM_PITCHES = ['C1', 'C2', 'OH', 'HH', 'HT', 'MT', 'FT', 'SN', 'BS'];
 
         .measure-tab.active {
             background-color: #fffde7;
+        }
+
+        .measure-bpm {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--mat-sys-primary);
+            letter-spacing: 0.05em;
         }
 
         .edit-btn {

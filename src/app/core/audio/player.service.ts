@@ -144,7 +144,8 @@ export class PlayerService {
 
         const measure = primaryTrack.measures[this.measureIndex];
         const totalSteps = measure.beatsPerBar * measure.stepsPerBeat;
-        this.nextStepTime += 60 / (this.bpm * measure.stepsPerBeat);
+        const effectiveBpm = measure.bpm ?? this.bpm;
+        this.nextStepTime += 60 / (effectiveBpm * measure.stepsPerBeat);
         this.stepIndex++;
 
         if (this.stepIndex >= totalSteps) {

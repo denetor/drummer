@@ -5,4 +5,5 @@ export interface Measure {
     beatUnit: number;
     stepsPerBeat: number;
     steps: Step[];
+    bpm?: number;
 }

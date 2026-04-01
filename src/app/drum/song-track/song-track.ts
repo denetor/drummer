@@ -100,7 +100,7 @@ import { MeasureEditorComponent } from '../measure-editor/measure-editor';
             <app-measure-editor
                 [measure]="track().measures[editingMeasureIndex()!]"
                 [instrument]="track().instrument"
-                [bpm]="bpm()"
+                [songBpm]="bpm()"
                 (measureChange)="onMeasureChange($event)"
                 (closed)="editingMeasureIndex.set(null)"
             />

@@ -139,20 +139,21 @@ Information abount Measure representation can be found in the file `resources/me
 - [x] Add an import button to SongControlBar to load a json file into the current song
 
 ### v0.7 — BPM change
-- [ ] Reason on how to change the BPM from track-based to measure-based. Current BPM selector could be transformed in a speed multiplier
+- [x] Allow changing the BPM for single measures.
 
-### v0.8 — UI improvements
+### v0.8 — Connection to mock API server to retrieve the songs list and a song's data
+- [ ] Mock endpoint to list songs
+- [ ] List songs
+- [ ] Mock endpoint to retrieve song json
+- [ ] Load song
+
+### v0.9 — UI improvements
 - [ ] Allow changing beatsPerBar and stepsPerBeat for each measure
 - [ ] Better SongControlBar buttons
 - [ ] Add comments to measures, to be displayed on top or below
 - [ ] In MeasureEditorComponent, add a button to clear all cells 
 - [ ] Clearer loop-play button in MeasureEditorComponent
-
-### v0.9 — Connection to mock API server to retrieve the songs list and a song's data
-- [ ] Mock endpoint to list songs
-- [ ] List songs
-- [ ] Mock endpoint to retrieve song json
-- [ ] Load song
+- [ ] Add playback speed multiplier to slow down or speed up the current song 
 
 ### v1.0 — Release
 - [ ] Deploy scripts
